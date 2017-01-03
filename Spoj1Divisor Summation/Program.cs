@@ -20,19 +20,18 @@ namespace Spoj1Divisor_Summation
 
         public static void DivisorSumation(TextReader reader, TextWriter writer)
         {
-           //*******************************
-           //* TODO: Implement method body *
-           //*******************************
-            int number = 0;
-
-            
-
-            List<int> result = new List<int>();
-
+            List<int> numbers = new List<int>();
+            HashSet<int> result = new HashSet<int>();
+          
             try
             {
-                number = GetNumber(reader);
-                result = DoJob(number).ToList();
+                GetNumbers(numbers,reader);
+                
+                foreach (var number in numbers)
+                {
+                    result = DoJob(number,result);
+                }
+                
                 WriteResults(writer, result);
             }
             catch (MyNumberExepction e)
@@ -57,47 +56,59 @@ namespace Spoj1Divisor_Summation
                 reader.Close();
                 writer.Flush();
                 writer.Close();
-                Console.ReadLine();
             }
          
         }
 
-        private static int GetNumber(TextReader reader)
+        private static void GetNumbers(List<int> numbers, TextReader reader)
         {
-            string result = reader.ReadLine();
-            int number = 0;
-            number = Int32.Parse(result);
-       
-            return number;
+            string resultString = "";
+            do
+            {
+                resultString = reader.ReadLine();
+               
+                if (resultString != null)
+                {
+                    int number = 0;
+                    if (resultString.Length != 0)
+                    {
+                        number = Int32.Parse(resultString);
+                        numbers.Add(number);
+                    }
+                    
+                }
+
+            } while (resultString != null);
         }
 
-
-        private static void WriteResults(TextWriter writer, List<int> result)
+        private static void WriteResults(TextWriter writer, HashSet<int> result)
         {
-            foreach (var count in result)
+            List<int> resultList = result.ToList();
+            resultList.Sort();
+            
+            foreach (var sum in resultList)
             {
-                writer.WriteLine(count.ToString());
+                writer.WriteLine(sum.ToString());
             }
         }
 
 
-        private static HashSet<int> DoJob(int number)
-        {
+        private static HashSet<int> DoJob(int number,HashSet<int> sumSet)
+        { 
             if (number < 1 || number > 500000) throw new MyNumberExepction();
-            HashSet<int> result = new HashSet<int>();
 
             int sum = 0;
 
-            for (int i = 0; i < (int) Math.Sqrt(number); i++)
+            for (int i = 1; i <number; i++)
             {
-                
-                if ((i % number) == 0)
+                if ((number % i) == 0)
                 {
                     sum += i;
                 }
             }
 
-            return result;
+            sumSet.Add(sum);
+            return sumSet;
         }
     }
 }
