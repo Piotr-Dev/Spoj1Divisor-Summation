@@ -14,16 +14,19 @@ namespace Spoj1Divisor_Summation
             var reader = new StreamReader(Console.OpenStandardInput());
             var writer = new StreamWriter(Console.OpenStandardOutput());
             writer.AutoFlush = false;
-
+           // Console.ReadKey();
+           // abcd
             DivisorSumation(reader, writer);
         }
 
         public static void DivisorSumation(TextReader reader, TextWriter writer)
         {
-           //*******************************
-           //* TODO: Implement method body *
-           //*******************************
 
+            //*******************************
+            //* TODO: Implement method body *
+            //*******************************
+
+            Console.ReadKey();
             reader.Close();
             writer.Flush();
             writer.Close();
