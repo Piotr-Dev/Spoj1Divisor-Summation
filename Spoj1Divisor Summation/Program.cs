@@ -25,16 +25,17 @@ namespace Spoj1Divisor_Summation
            //*******************************
             int number = 0;
 
+            List<int> result = new List<int>();
+
             try
             {
-                List<int> result = DoJob(number).ToList();
+                result = DoJob(number).ToList();
+                WrieResults(writer, result);
             }
             catch (MyNumberExepction e)
             {
                 writer.WriteLine("Wrong range!");
-                
             }
-
 
             finally
             {
@@ -46,10 +47,24 @@ namespace Spoj1Divisor_Summation
          
         }
 
+        private static void WrieResults(TextWriter writer, List<int> result)
+        {
+            throw new NotImplementedException();
+        }
+
+
         private static HashSet<int> DoJob(int number)
         {
             if (number < 1 || number > 500000) throw new MyNumberExepction();
             HashSet<int> result = new HashSet<int>();
+
+            for (int i = 0; i < (int) Math.Sqrt(number); i++)
+            {
+                if ((i % number) == 0)
+                {
+                    result.Add(i);
+                }
+            }
 
             return result;
         }
