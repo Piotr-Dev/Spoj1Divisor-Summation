@@ -30,7 +30,7 @@ namespace Spoj1Divisor_Summation
             try
             {
                 result = DoJob(number).ToList();
-                WrieResults(writer, result);
+                WriteResults(writer, result);
             }
             catch (MyNumberExepction e)
             {
@@ -47,7 +47,7 @@ namespace Spoj1Divisor_Summation
          
         }
 
-        private static void WrieResults(TextWriter writer, List<int> result)
+        private static void WriteResults(TextWriter writer, List<int> result)
         {
             throw new NotImplementedException();
         }
