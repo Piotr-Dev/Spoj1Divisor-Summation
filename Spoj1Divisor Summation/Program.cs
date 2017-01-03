@@ -32,6 +32,7 @@ namespace Spoj1Divisor_Summation
 
         private static HashSet<int> DoJob(int number)
         {
+            if (number < 1 && number > 500000) throw new MyNumberExepction();
             HashSet<int> result = new HashSet<int>();
 
             return result;
