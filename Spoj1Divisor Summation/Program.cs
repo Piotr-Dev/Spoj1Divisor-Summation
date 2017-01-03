@@ -23,10 +23,18 @@ namespace Spoj1Divisor_Summation
            //*******************************
            //* TODO: Implement method body *
            //*******************************
-
+            int number = 0; 
+            List<int> result = DoJob(number).ToList();
             reader.Close();
             writer.Flush();
             writer.Close();
+        }
+
+        private static HashSet<int> DoJob(int number)
+        {
+            HashSet<int> result = new HashSet<int>();
+
+            return result;
         }
     }
 }
