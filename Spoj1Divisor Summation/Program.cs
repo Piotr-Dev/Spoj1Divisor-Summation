@@ -20,7 +20,7 @@ namespace Spoj1Divisor_Summation
 
         public static void DivisorSumation(TextReader reader, TextWriter writer)
         {
-            List<int> result = new List<int>();
+         
 
             try
             {
@@ -30,10 +30,10 @@ namespace Spoj1Divisor_Summation
                 {
                     resultString = reader.ReadLine();
                     int number = Int32.Parse(resultString);
-                    result = DoJob(number, result);
+                    DoJob(number, writer);
                 }
 
-                WriteResults(writer, result);
+           
             }
             catch (MyNumberExepction e)
             {
@@ -51,10 +51,7 @@ namespace Spoj1Divisor_Summation
             {
                 writer.WriteLine("Not number");
             }
-            catch (NullReferenceException)
-            {
-                writer.WriteLine("Null in !!!");
-            }
+           
 
             finally
             {
@@ -65,17 +62,7 @@ namespace Spoj1Divisor_Summation
          
         }
 
-
-        private static void WriteResults(TextWriter writer, List<int> result)
-        {  
-            foreach (var sum in result)
-            {
-                writer.WriteLine(sum.ToString());
-            }
-        }
-
-
-        private static List<int> DoJob(int number,List<int> sumSet)
+        private static void DoJob(int number,TextWriter writer)
         { 
             if (number < 1 || number > 500000) throw new MyNumberExepction();
 
@@ -89,8 +76,7 @@ namespace Spoj1Divisor_Summation
                 }
             }
 
-            sumSet.Add(sum);
-            return sumSet;
+            writer.WriteLine(sum);
         }
     }
 }
