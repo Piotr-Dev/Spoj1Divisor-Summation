@@ -25,16 +25,31 @@ namespace Spoj1Divisor_Summation
            //*******************************
             int number = 0;
 
+            
+
             List<int> result = new List<int>();
 
             try
             {
+                number = GetNumber(reader);
                 result = DoJob(number).ToList();
                 WriteResults(writer, result);
             }
             catch (MyNumberExepction e)
             {
                 writer.WriteLine("Wrong range!");
+            }
+            catch (ArgumentNullException e)
+            {
+                writer.WriteLine("Null exepction");
+            }
+            catch (OverflowException)
+            {
+                writer.WriteLine("Stack overflow exepction");
+            }
+            catch (FormatException)
+            {
+                writer.WriteLine("Not number");
             }
 
             finally
@@ -47,9 +62,22 @@ namespace Spoj1Divisor_Summation
          
         }
 
+        private static int GetNumber(TextReader reader)
+        {
+            string result = reader.ReadLine();
+            int number = 0;
+            number = Int32.Parse(result);
+       
+            return number;
+        }
+
+
         private static void WriteResults(TextWriter writer, List<int> result)
         {
-            throw new NotImplementedException();
+            foreach (var count in result)
+            {
+                writer.WriteLine(count.ToString());
+            }
         }
 
 
@@ -58,11 +86,14 @@ namespace Spoj1Divisor_Summation
             if (number < 1 || number > 500000) throw new MyNumberExepction();
             HashSet<int> result = new HashSet<int>();
 
+            int sum = 0;
+
             for (int i = 0; i < (int) Math.Sqrt(number); i++)
             {
+                
                 if ((i % number) == 0)
                 {
-                    result.Add(i);
+                    sum += i;
                 }
             }
 
