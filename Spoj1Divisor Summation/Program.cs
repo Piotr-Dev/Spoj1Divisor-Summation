@@ -16,13 +16,17 @@ namespace Spoj1Divisor_Summation
             writer.AutoFlush = false;
 
             DivisorSumation(reader, writer);
+            //GI TEST
         }
 
         public static void DivisorSumation(TextReader reader, TextWriter writer)
         {
-           //*******************************
-           //* TODO: Implement method body *
-           //*******************************
+            //*******************************
+            //* TODO: Implement method body *
+            //*******************************
+
+           
+            
 
             reader.Close();
             writer.Flush();
