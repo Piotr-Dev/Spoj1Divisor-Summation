@@ -23,16 +23,32 @@ namespace Spoj1Divisor_Summation
            //*******************************
            //* TODO: Implement method body *
            //*******************************
-            int number = 0; 
-            List<int> result = DoJob(number).ToList();
-            reader.Close();
-            writer.Flush();
-            writer.Close();
+            int number = 0;
+
+            try
+            {
+                List<int> result = DoJob(number).ToList();
+            }
+            catch (MyNumberExepction e)
+            {
+                writer.WriteLine("Wrong range!");
+                
+            }
+
+
+            finally
+            {
+                reader.Close();
+                writer.Flush();
+                writer.Close();
+                Console.ReadLine();
+            }
+         
         }
 
         private static HashSet<int> DoJob(int number)
         {
-            if (number < 1 && number > 500000) throw new MyNumberExepction();
+            if (number < 1 || number > 500000) throw new MyNumberExepction();
             HashSet<int> result = new HashSet<int>();
 
             return result;
