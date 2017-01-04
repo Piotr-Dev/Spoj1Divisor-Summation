@@ -56,7 +56,7 @@ namespace Spoj1Divisor_Summation
         private static void WriteInformationAboutData(string information)
         {
             var informationWriter = new StreamWriter(Console.OpenStandardOutput());
-            informationWriter.WriteLine(information + "\n==============\n");
+            informationWriter.WriteLine(information + "\n==============");
             informationWriter.Flush();
             informationWriter.Close();
         }
