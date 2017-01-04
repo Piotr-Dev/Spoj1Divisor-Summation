@@ -20,6 +20,11 @@ namespace Spoj1Divisor_Summation
 
         public static void DivisorSumation(TextReader reader, TextWriter writer)
         {
+            //Inform
+            var myWriter = new StreamWriter(Console.OpenStandardOutput());
+            myWriter.WriteLine("Inputs");
+            myWriter.WriteLine("==============");
+
             try
             {
                 string resultString = reader.ReadLine();
@@ -52,6 +57,10 @@ namespace Spoj1Divisor_Summation
 
             finally
             {
+                myWriter.WriteLine("Ouput");
+                myWriter.WriteLine("==============");
+                myWriter.Close();
+
                 reader.Close();
                 writer.Flush();
                 writer.Close();
