@@ -16,8 +16,8 @@ namespace Spoj1Divisor_Summation
             var writer = new StreamWriter(Console.OpenStandardOutput());
             writer.AutoFlush = false;
 
-
             DivisorSumation(reader, writer);
+            Console.ReadKey();
         }
 
         public static void DivisorSumation(TextReader reader, TextWriter writer)
@@ -25,17 +25,51 @@ namespace Spoj1Divisor_Summation
             //*******************************
             //* TODO: Implement method body *
             //*******************************
-
+            Console.WriteLine("Inputs");
             List<int> Inputy = new List<int>();
-            int ileRekordów = int.Parse(reader.ReadLine());
+            int ileRekordów = 0;
+            // int ileRekordów = int.Parse(reader.ReadLine());
+            while (ileRekordów == 0)
+            {
+                try
+                {
+                    ileRekordów = int.Parse(reader.ReadLine());
+                }
+                catch (FormatException e)
+                {
+                    ileRekordów = 0;
+                }
+                catch (ArgumentNullException e)
+                {
+                    ileRekordów = 0;
+                }
+                catch (OverflowException e)
+                {
+                    ileRekordów = 0;
+                }
+            }
 
             for (int i = 0; i < ileRekordów; i++)
             {
-                int liczba = int.Parse(reader.ReadLine());
-                Inputy.Add(liczba);
+                try
+                {
+                    int liczba = int.Parse(reader.ReadLine());
+                    Inputy.Add(liczba);
+                }
+                catch (FormatException e)
+                {
+                }
+                catch (ArgumentNullException e)
+                {
+                }
+                catch (OverflowException e)
+                {
+                }
             }
-            foreach (var k in Inputy)
 
+
+            Console.WriteLine("\nOutputs");
+            foreach (var k in Inputy)
             {
                 int suma = 0;
                 if (k >= 1 && k <= 500000)
