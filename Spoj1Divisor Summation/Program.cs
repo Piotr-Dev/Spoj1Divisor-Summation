@@ -22,56 +22,60 @@ namespace Spoj1Divisor_Summation
 
         public static void DivisorSumation(TextReader reader, TextWriter writer)
         {
-            //*******************************
-            //* TODO: Implement method body *
-            //*******************************
-            string inputNum, inputSize;
-            int number;
+            string inputNumber, inputSize;
+            int number = 0;
             int quantity = 0;
-            var total = 0;
-            List<int> ListOfNumbers = new List<int>();
-
+            var inputString = new StreamWriter(Console.OpenStandardOutput());
+            var outputString = new StreamWriter(Console.OpenStandardOutput());
+            inputString.WriteLine("Input:");
+            inputString.Flush();
             inputSize = reader.ReadLine();
             int.TryParse(inputSize, out quantity);
-
             for (int k = 0; k < quantity; k++)
             {
-                inputNum = reader.ReadLine();
-                int.TryParse(inputNum, out number);
-                if (number <= 1 && number >= 500000)
-                {
-                    Console.WriteLine("Blad");
-                }
-                else
-                {
-                    for (var i = 1; i <= number; i++)
-                    {
-
-                        if (number % i == 0 && i != number)
-                        {
-                            ListOfNumbers.Add(i);
-                        }
-
-
-                    }
-                }
-                
-                
-                foreach (var item in ListOfNumbers)
-                {
-                    total = 0;
-                    total = ListOfNumbers.Sum();
-                }
-                ListOfNumbers.Clear();
-                writer.WriteLine(total);
+                inputNumber = reader.ReadLine();
+                int.TryParse(inputNumber, out number);
+                writer.WriteLine(CalculateDivisorsSumation(number));
             }
+            //outputString.WriteLine("Output:");
 
 
+            outputString.Flush();
             reader.Close();
             writer.Flush();
-            writer.Close();
+            writer.Close();  
+        }
 
+        public static void ConverseToInt()
+        {
+
+        }
+        public static int CalculateDivisorsSumation(int number)
+        {
+            List<int> ListOfNumbers = new List<int>();
+            int total= 0;
+            
+            for (int divisor = 1; divisor < number; divisor++)
+            {
+                if (number % divisor == 0)
+                {
+                    ListOfNumbers.Add(divisor);
+                }
+            }
+
+            foreach(var item in ListOfNumbers)
+            {
+                total = 0;
+                total = ListOfNumbers.Sum();
+
+            }
+            ListOfNumbers.Clear();
+            return total;
         }
     }
 }
+
+
+//if (string.IsNullOrWhiteSpace(inputNum)) throw new ArgumentNullException("test");
+//mininumber //maximumnumber
 
