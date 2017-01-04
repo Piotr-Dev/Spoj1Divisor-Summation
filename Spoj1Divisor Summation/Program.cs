@@ -23,16 +23,16 @@ namespace Spoj1Divisor_Summation
             for (int i = 0; i < IloscLiczb; i++)
             {
                 int input = Convert.ToInt32(reader.ReadLine());
-                int x = 1;
+                int Podzielnik = 1;
                 List<int> SumaPodzielnikow = new List<int>();
-                while (x < input)
+                while (Podzielnik < input)
                 {
-                    int b = input % x;
+                    int b = input % Podzielnik;
                     if (b == 0)
                     {
-                        SumaPodzielnikow.Add(x);
+                        SumaPodzielnikow.Add(Podzielnik);
                     }
-                    x++;
+                    Podzielnik++;
                 }
                 int sum = SumaPodzielnikow.Sum();
                 writer.WriteLine(sum);
