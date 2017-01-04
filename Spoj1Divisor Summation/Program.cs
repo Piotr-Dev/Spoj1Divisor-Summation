@@ -31,11 +31,11 @@ namespace Spoj1Divisor_Summation
             inputString.Flush();
             inputSize = reader.ReadLine();
             int.TryParse(inputSize, out quantity);
-            for (int k = 0; k < quantity; k++)
+            for (int size = 0; size < quantity; size++)
             {
                 inputNumber = reader.ReadLine();
                 int.TryParse(inputNumber, out number);
-                writer.WriteLine(CalculateDivisorsSumation(number));
+                writer.WriteLine(GetTotalSumOfProperDivisors(number));
             }
             //outputString.WriteLine("Output:");
 
@@ -46,11 +46,11 @@ namespace Spoj1Divisor_Summation
             writer.Close();  
         }
 
-        public static void ConverseToInt()
+        public static void ConvertToInt()
         {
 
         }
-        public static int CalculateDivisorsSumation(int number)
+        public static int GetTotalSumOfProperDivisors(int number)
         {
             List<int> ListOfNumbers = new List<int>();
             int total= 0;
@@ -77,5 +77,5 @@ namespace Spoj1Divisor_Summation
 
 
 //if (string.IsNullOrWhiteSpace(inputNum)) throw new ArgumentNullException("test");
-//mininumber //maximumnumber
+
 
