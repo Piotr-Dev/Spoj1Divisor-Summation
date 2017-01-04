@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace Spoj1Divisor_Summation
 {
-    public class MyNumberExepction : Exception
+    public class OutOfRangeNumberExepction : Exception
     {
         public int Number { get; set; }
-        public string Message { get; set; }
+        public override string Message { get; }
 
-        public MyNumberExepction(int number, string message)
+        public OutOfRangeNumberExepction(int number)
         {
             Number = number;
-            Message = message;
+            Message = "Number is out of range \nNumber: " + Number;
         }
     }
 }

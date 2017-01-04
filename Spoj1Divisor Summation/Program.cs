@@ -20,49 +20,45 @@ namespace Spoj1Divisor_Summation
 
         public static void DivisorSumation(TextReader reader, TextWriter writer)
         {
-            //Inform
-            var myWriter = new StreamWriter(Console.OpenStandardOutput());
-            myWriter.WriteLine("Inputs");
-            myWriter.WriteLine("==============");
-            myWriter.Flush();
+            var informationWriter = new StreamWriter(Console.OpenStandardOutput());
+            informationWriter.WriteLine("Inputs\n==============");
+            informationWriter.Flush();
 
             try
             {
                 string resultString = reader.ReadLine();
-                int length = Int32.Parse(resultString);
+                int length = int.Parse(resultString);
                 for (int i = 0; i < length; i++)
                 {
-                    resultString = reader.ReadLine();
-                    int number = Int32.Parse(resultString);
-                    DoJob(number, writer);
+                   resultString = reader.ReadLine();
+                   int number = int.Parse(resultString);
+                   writer.WriteLine(CountSumOfDivisors(number));
                 }
 
             }
-            catch (MyNumberExepction e)
+            catch (OutOfRangeNumberExepction e)
             {
                 writer.WriteLine(e.Message);
             }
             catch (ArgumentNullException e)
             {
-                writer.WriteLine("Null exepction");
+                writer.WriteLine(e.Message);
             }
-            catch (OverflowException)
+            catch (OverflowException e)
             {
-                writer.WriteLine("Overflow exepction");
+                writer.WriteLine(e.Message);
             }
-            catch (FormatException)
+            catch (FormatException e)
             {
-                writer.WriteLine("Not number");
+                writer.WriteLine(e.Message);
             }
            
 
             finally
             {
-                myWriter.WriteLine("\n");
-                myWriter.WriteLine("Ouput");
-                myWriter.WriteLine("==============");
-                myWriter.Flush();
-                myWriter.Close();
+                informationWriter.WriteLine("\nOuput\n==============");
+                informationWriter.Flush();
+                informationWriter.Close();
 
                 reader.Close();
                 writer.Flush();
@@ -71,9 +67,9 @@ namespace Spoj1Divisor_Summation
          
         }
 
-        private static void DoJob(int number,TextWriter writer)
+        private static int CountSumOfDivisors(int number)
         { 
-            if (number < 1 || number > 500000) throw new MyNumberExepction(number,"Wrong Range");
+            if (number < 1 || number > 500000) throw new OutOfRangeNumberExepction(number);
 
             int sum = 0;
 
@@ -85,7 +81,8 @@ namespace Spoj1Divisor_Summation
                 }
             }
 
-            writer.WriteLine(sum);
+            return sum;
+           
         }
     }
 }
