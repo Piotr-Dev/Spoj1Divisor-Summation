@@ -27,9 +27,7 @@ namespace Spoj1Divisor_Summation
             do
             {
                 string textFromInput = reader.ReadLine();
-                isNotNumber = !int.TryParse(textFromInput, out amountOfInputs);
-                bool isNumber = !isNotNumber;
-                if(isNumber) CalculateSumsDivisorForNumbers(amountOfInputs, reader, writer);
+                isNotNumber = !int.TryParse(textFromInput, out amountOfInputs) ? true : CalculateSumsDivisorForNumbers(amountOfInputs, reader, writer);
             } while (isNotNumber);
 
             WriteInformationAboutData("Output");
@@ -39,7 +37,7 @@ namespace Spoj1Divisor_Summation
             writer.Close();
         }
 
-        private static void CalculateSumsDivisorForNumbers(int amountOfInputs, TextReader reader, TextWriter writer)
+        private static bool CalculateSumsDivisorForNumbers(int amountOfInputs, TextReader reader, TextWriter writer)
         {
             string textFromInput = string.Empty;
             int number = 0;
@@ -51,6 +49,8 @@ namespace Spoj1Divisor_Summation
                 if (number < MinRange || number > MaxRange) continue;
                 writer.WriteLine(CalculateSumOfDivisorsForNumber(number));
             }
+
+            return false;
         }
 
         private static void WriteInformationAboutData(string information)
