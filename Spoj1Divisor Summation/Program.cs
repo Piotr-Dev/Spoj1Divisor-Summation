@@ -26,9 +26,11 @@ namespace Spoj1Divisor_Summation
             //* TODO: Implement method body *
             //*******************************
             string inputNum, inputSize;
-            int quantity, number;
+            int number;
+            int quantity = 0;
             var total = 0;
             List<int> ListOfNumbers = new List<int>();
+
             inputSize = reader.ReadLine();
             int.TryParse(inputSize, out quantity);
 
@@ -36,13 +38,25 @@ namespace Spoj1Divisor_Summation
             {
                 inputNum = reader.ReadLine();
                 int.TryParse(inputNum, out number);
-                for (var i = 1; i <= number; i++)
+                if (number <= 1 && number >= 500000)
                 {
-                    if (number % i == 0 && i != number)
+                    Console.WriteLine("Blad");
+                }
+                else
+                {
+                    for (var i = 1; i <= number; i++)
                     {
-                        ListOfNumbers.Add(i);
+
+                        if (number % i == 0 && i != number)
+                        {
+                            ListOfNumbers.Add(i);
+                        }
+
+
                     }
                 }
+                
+                
                 foreach (var item in ListOfNumbers)
                 {
                     total = 0;
@@ -51,6 +65,8 @@ namespace Spoj1Divisor_Summation
                 ListOfNumbers.Clear();
                 writer.WriteLine(total);
             }
+
+
             reader.Close();
             writer.Flush();
             writer.Close();
