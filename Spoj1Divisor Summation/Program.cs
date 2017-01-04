@@ -40,7 +40,7 @@ namespace Spoj1Divisor_Summation
             }
             catch (MyNumberExepction e)
             {
-                writer.WriteLine("Wrong range");
+                writer.WriteLine(e.Message);
             }
             catch (ArgumentNullException e)
             {
@@ -73,7 +73,7 @@ namespace Spoj1Divisor_Summation
 
         private static void DoJob(int number,TextWriter writer)
         { 
-            if (number < 1 || number > 500000) throw new MyNumberExepction();
+            if (number < 1 || number > 500000) throw new MyNumberExepction(number,"Wrong Range");
 
             int sum = 0;
 

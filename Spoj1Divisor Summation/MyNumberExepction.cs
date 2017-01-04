@@ -8,6 +8,13 @@ namespace Spoj1Divisor_Summation
 {
     public class MyNumberExepction : Exception
     {
+        public int Number { get; set; }
+        public string Message { get; set; }
 
+        public MyNumberExepction(int number, string message)
+        {
+            Number = number;
+            Message = message;
+        }
     }
 }
