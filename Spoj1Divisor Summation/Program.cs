@@ -19,7 +19,6 @@ namespace Spoj1Divisor_Summation
             DivisorSumation(reader, writer);
             Console.ReadKey();
         }
-
         public static void DivisorSumation(TextReader reader, TextWriter writer)
         {
             //*******************************
@@ -66,24 +65,19 @@ namespace Spoj1Divisor_Summation
                 {
                 }
             }
-
-
             Console.WriteLine("\nOutputs");
             foreach (var k in Inputy)
             {
                 int suma = 0;
                 if (k >= 1 && k <= 500000)
-                {
+                {               
                     for (int i = 1; i < k; i++)
-                    {
-                        if (k != i)
-                        {
+                    {                      
                             int czyPodzielna = k % i;
                             if (czyPodzielna == 0)
                             {
                                 suma += i;
-                            }
-                        }
+                            }                      
                     }
                     writer.WriteLine(suma);
                 }
