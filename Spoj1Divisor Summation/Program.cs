@@ -24,6 +24,7 @@ namespace Spoj1Divisor_Summation
             var myWriter = new StreamWriter(Console.OpenStandardOutput());
             myWriter.WriteLine("Inputs");
             myWriter.WriteLine("==============");
+            myWriter.Flush();
 
             try
             {
@@ -57,8 +58,10 @@ namespace Spoj1Divisor_Summation
 
             finally
             {
+                myWriter.WriteLine("\n");
                 myWriter.WriteLine("Ouput");
                 myWriter.WriteLine("==============");
+                myWriter.Flush();
                 myWriter.Close();
 
                 reader.Close();
