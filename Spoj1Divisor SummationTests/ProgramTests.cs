@@ -13,7 +13,7 @@ namespace Spoj1Divisor_Summation.Tests
     public class ProgramTests
     {
         [TestMethod()]
-        public void Divisor_Sumation_Result_Correctness_Test() 
+        public void Divisor_Sumation_Result_Correctness_Test()
         {
             // Arrange
             var consoleInput = new StringReader(InputTestData());
