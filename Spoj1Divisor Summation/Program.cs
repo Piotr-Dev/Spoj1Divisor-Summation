@@ -27,7 +27,8 @@ namespace Spoj1Divisor_Summation
             do
             {
                 string textFromInput = reader.ReadLine();
-                isNotNumber = !int.TryParse(textFromInput, out amountOfInputs) ? true : CalculateSumsDivisorForNumbers(amountOfInputs, reader, writer);
+                isNotNumber = int.TryParse(textFromInput, out amountOfInputs)  ? 
+                    CalculateSumsDivisorForNumbers(amountOfInputs, reader, writer) : true;
             } while (isNotNumber);
 
             WriteInformationAboutData("Output");
