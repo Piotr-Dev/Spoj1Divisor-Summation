@@ -21,24 +21,27 @@ namespace Spoj1Divisor_Summation
         public static void DivisorSumation(TextReader reader, TextWriter writer)
         {
             WriteInformationAboutData("Input");
-
-            int amountOfInputs = 0;
-            bool isNotNumber = false;
-            do
-            {
-                string textFromInput = reader.ReadLine();
-                isNotNumber = int.TryParse(textFromInput, out amountOfInputs)  ? 
-                    CalculateSumsDivisorForNumbers(amountOfInputs, reader, writer) : true;
-            } while (isNotNumber);
-
+            ValidateAndCountDivisorSumationFromInputNumbers(reader, writer);
             WriteInformationAboutData("Output");
-
             reader.Close();
             writer.Flush();
             writer.Close();
         }
 
-        public static bool CalculateSumsDivisorForNumbers(int amountOfInputs, TextReader reader, TextWriter writer)
+        private static void ValidateAndCountDivisorSumationFromInputNumbers(TextReader reader, TextWriter writer)
+        {
+            int amountOfInputs = 0;
+            bool isNumber = false;
+            do
+            {
+                string textFromInput = reader.ReadLine();
+                isNumber = int.TryParse(textFromInput, out amountOfInputs);
+                if (isNumber) CalculateSumsDivisorForNumbers(amountOfInputs, reader, writer);
+            } while (!isNumber);
+
+        }
+
+        private static void CalculateSumsDivisorForNumbers(int amountOfInputs, TextReader reader, TextWriter writer)
         {
             string textFromInput = string.Empty;
             int number = 0;
@@ -51,10 +54,10 @@ namespace Spoj1Divisor_Summation
                 writer.WriteLine(CalculateSumOfDivisorsForNumber(number));
             }
 
-            return false;
+            
         }
 
-        public static void WriteInformationAboutData(string information)
+        private static void WriteInformationAboutData(string information)
         {
             var informationWriter = new StreamWriter(Console.OpenStandardOutput());
             informationWriter.WriteLine(information + "\n==============");
@@ -62,7 +65,7 @@ namespace Spoj1Divisor_Summation
             informationWriter.Close();
         }
 
-        public static int CalculateSumOfDivisorsForNumber(int number)
+        private static int CalculateSumOfDivisorsForNumber(int number)
         {
             int sum = 0;
             
