@@ -10,6 +10,8 @@ namespace Spoj1Divisor_Summation
 {
     public class Program
     {
+        public static List<int> Inputy = new List<int>();
+        public static List<int> Outputy = new List<int>();
         public static void Main()
         {
             var reader = new StreamReader(Console.OpenStandardInput());
@@ -25,24 +27,35 @@ namespace Spoj1Divisor_Summation
             //* TODO: Implement method body *
             //*******************************
             Console.WriteLine("Inputs");
-            List<int> Inputy = new List<int>();
-            int ileRekordów = 0;
-            // int ileRekordów = int.Parse(reader.ReadLine());
+            TakeInputs(reader);
+            GiveOutputs();
+            Console.WriteLine("\nOutputs:");
+            foreach (var dana in Outputy)
+            {
+                writer.WriteLine(dana);
+            }
+            reader.Close();
+            writer.Flush();
+            writer.Close();
+        }
+        public static void TakeInputs(TextReader reader)
+        {
+            var ileRekordów = 0;
             while (ileRekordów == 0)
             {
                 try
                 {
                     ileRekordów = int.Parse(reader.ReadLine());
                 }
-                catch (FormatException e)
+                catch (FormatException)
                 {
                     ileRekordów = 0;
                 }
-                catch (ArgumentNullException e)
+                catch (ArgumentNullException)
                 {
                     ileRekordów = 0;
                 }
-                catch (OverflowException e)
+                catch (OverflowException)
                 {
                     ileRekordów = 0;
                 }
@@ -55,36 +68,41 @@ namespace Spoj1Divisor_Summation
                     int liczba = int.Parse(reader.ReadLine());
                     Inputy.Add(liczba);
                 }
-                catch (FormatException e)
+                catch (FormatException)
                 {
                 }
-                catch (ArgumentNullException e)
+                catch (ArgumentNullException)
                 {
                 }
-                catch (OverflowException e)
+                catch (OverflowException)
                 {
                 }
             }
-            Console.WriteLine("\nOutputs");
-            foreach (var k in Inputy)
+        }
+        private static void GiveOutputs()
+        {
+            foreach (var liczba in Inputy)
             {
                 int suma = 0;
-                if (k >= 1 && k <= 500000)
-                {               
-                    for (int i = 1; i < k; i++)
-                    {                      
-                            int czyPodzielna = k % i;
-                            if (czyPodzielna == 0)
-                            {
-                                suma += i;
-                            }                      
+                int pierwiastek = (int)Math.Sqrt(liczba);
+                if (liczba >= 1 && liczba <= 500000)
+                {
+                    for (int i = 1; i < pierwiastek; ++i)
+                    {
+                        bool czyPodzielna = liczba % i == 0;
+                        if (czyPodzielna)
+                        {
+                            suma += i + pierwiastek / i;
+                        }
+                        if (i == pierwiastek)
+                        {
+                            suma += i;
+                        }
                     }
-                    writer.WriteLine(suma);
+                    suma -= pierwiastek;
+                    Outputy.Add(suma);
                 }
             }
-            reader.Close();
-            writer.Flush();
-            writer.Close();
         }
     }
 }
