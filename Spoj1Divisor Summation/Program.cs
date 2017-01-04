@@ -20,41 +20,49 @@ namespace Spoj1Divisor_Summation
 
         public static void DivisorSumation(TextReader reader, TextWriter writer)
         {
-            var informationWriter = new StreamWriter(Console.OpenStandardOutput());
-            informationWriter.WriteLine("Inputs\n==============");
-            informationWriter.Flush();
+            WriteInformationAboutData("Input");
 
-            string resultString = reader.ReadLine();
-
-            try
-            {   
-                int length = int.Parse(resultString);
-                for (int i = 0; i < length; i++)
-                {
-                    resultString = reader.ReadLine();
-                    int number = int.Parse(resultString);
-                    writer.WriteLine(CalculateSumOfDivisors(number));
-                }
-
-            }
-            catch (Exception e)
+            int amountOfInputs = 0;
+            bool isNotNumber = false;
+            do
             {
-                writer.WriteLine(e.Message);
-            }
+                string textFromInput = reader.ReadLine();
+                isNotNumber = !int.TryParse(textFromInput, out amountOfInputs);
+                bool isNumber = !isNotNumber;
+                if(isNumber) CalculateSumsDivisorForNumbers(amountOfInputs, reader, writer);
+            } while (isNotNumber);
 
-            informationWriter.WriteLine("\nOutput\n==============");
-            informationWriter.Flush();
-            informationWriter.Close();
+            WriteInformationAboutData("Output");
 
             reader.Close();
             writer.Flush();
             writer.Close();
         }
 
-        private static int CalculateSumOfDivisors(int number)
+        private static void CalculateSumsDivisorForNumbers(int amountOfInputs, TextReader reader, TextWriter writer)
         {
-            if (number < MinRange || number > MaxRange) throw new OutOfRangeNumberExepction(number);
+            string textFromInput = string.Empty;
+            int number = 0;
 
+            for (int i = 0; i < amountOfInputs; i++)
+            {
+                textFromInput = reader.ReadLine();
+                int.TryParse(textFromInput, out number);
+                if (number < MinRange || number > MaxRange) continue;
+                writer.WriteLine(CalculateSumOfDivisorsForNumber(number));
+            }
+        }
+
+        private static void WriteInformationAboutData(string information)
+        {
+            var informationWriter = new StreamWriter(Console.OpenStandardOutput());
+            informationWriter.WriteLine(information + "\n==============\n");
+            informationWriter.Flush();
+            informationWriter.Close();
+        }
+
+        private static int CalculateSumOfDivisorsForNumber(int number)
+        {
             int sum = 0;
             
             for (int divider = 1; divider < number; divider++)
@@ -66,7 +74,6 @@ namespace Spoj1Divisor_Summation
             }
 
             return sum;
-           
         }
     }
 }
