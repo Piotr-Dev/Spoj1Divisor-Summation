@@ -6,8 +6,8 @@ namespace Spoj1Divisor_Summation
 {
     public class Program
     {
-        private const int MinRange = 1;
-        private const int MaxRange = 500000;
+        public const int MinRange = 1;
+        public const int MaxRange = 500000;
 
         public static void Main()
         {
@@ -37,7 +37,7 @@ namespace Spoj1Divisor_Summation
             writer.Close();
         }
 
-        private static bool CalculateSumsDivisorForNumbers(int amountOfInputs, TextReader reader, TextWriter writer)
+        public static bool CalculateSumsDivisorForNumbers(int amountOfInputs, TextReader reader, TextWriter writer)
         {
             string textFromInput = string.Empty;
             int number = 0;
@@ -53,7 +53,7 @@ namespace Spoj1Divisor_Summation
             return false;
         }
 
-        private static void WriteInformationAboutData(string information)
+        public static void WriteInformationAboutData(string information)
         {
             var informationWriter = new StreamWriter(Console.OpenStandardOutput());
             informationWriter.WriteLine(information + "\n==============");
@@ -61,7 +61,7 @@ namespace Spoj1Divisor_Summation
             informationWriter.Close();
         }
 
-        private static int CalculateSumOfDivisorsForNumber(int number)
+        public static int CalculateSumOfDivisorsForNumber(int number)
         {
             int sum = 0;
             
