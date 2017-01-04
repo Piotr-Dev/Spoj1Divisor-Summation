@@ -20,8 +20,6 @@ namespace Spoj1Divisor_Summation
 
         public static void DivisorSumation(TextReader reader, TextWriter writer)
         {
-         
-
             try
             {
                 string resultString = reader.ReadLine();
@@ -33,11 +31,10 @@ namespace Spoj1Divisor_Summation
                     DoJob(number, writer);
                 }
 
-           
             }
             catch (MyNumberExepction e)
             {
-                writer.WriteLine("Wrong range!");
+                writer.WriteLine("Wrong range");
             }
             catch (ArgumentNullException e)
             {
@@ -45,7 +42,7 @@ namespace Spoj1Divisor_Summation
             }
             catch (OverflowException)
             {
-                writer.WriteLine("Stack overflow exepction");
+                writer.WriteLine("Overflow exepction");
             }
             catch (FormatException)
             {
@@ -68,7 +65,7 @@ namespace Spoj1Divisor_Summation
 
             int sum = 0;
 
-            for (int i = 1; i <number; i++)
+            for (int i = 1; i < number; i++)
             {
                 if ((number % i) == 0)
                 {
