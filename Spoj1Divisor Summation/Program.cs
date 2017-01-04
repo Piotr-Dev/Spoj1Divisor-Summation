@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 
@@ -28,11 +29,11 @@ namespace Spoj1Divisor_Summation
 
             try
             {   
-                int length = Convert.ToInt32(resultString);
+                int length = int.Parse(resultString);
                 for (int i = 0; i < length; i++)
                 {
                     resultString = reader.ReadLine();
-                    int number = Convert.ToInt32(resultString);
+                    int number = int.Parse(resultString);
                     writer.WriteLine(CalculateSumOfDivisors(number));
                 }
 
