@@ -9,6 +9,9 @@ namespace Spoj1Divisor_Summation
 {
     public class Program
     {
+        private const int MinRange = 1;
+        private const int MaxRange = 500000;
+
         public static void Main()
         {
             var reader = new StreamReader(Console.OpenStandardInput());
@@ -54,8 +57,8 @@ namespace Spoj1Divisor_Summation
 
         public static int CalculateSumOfDivisors(int number)
         {
-            const int minRange = 1, maxRange = 500000;
-            if (number < minRange || number > maxRange) throw new OutOfRangeNumberExepction(number);
+          
+            if (number < MinRange || number > MaxRange) throw new OutOfRangeNumberExepction(number);
 
             int sum = 0;
 
