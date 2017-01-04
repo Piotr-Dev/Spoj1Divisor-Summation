@@ -17,35 +17,25 @@ namespace Spoj1Divisor_Summation
             DivisorSumation(reader, writer);
             Console.ReadLine();
         }
-
         public static void DivisorSumation(TextReader reader, TextWriter writer)
         {
-            int a = Convert.ToInt32(reader.ReadLine());
-            for (int i = 0; i < a; i++)
+            int IloscLiczb = Convert.ToInt32(reader.ReadLine());
+            for (int i = 0; i < IloscLiczb; i++)
             {
                 int input = Convert.ToInt32(reader.ReadLine());
-
-
                 int x = 1;
-                List<int> iList = new List<int>();
-
+                List<int> SumaPodzielnikow = new List<int>();
                 while (x < input)
                 {
                     int b = input % x;
                     if (b == 0)
                     {
-                        // Console.WriteLine(x);
-                        iList.Add(x);
+                        SumaPodzielnikow.Add(x);
                     }
                     x++;
                 }
-                int sum = iList.Sum();
-
-                //  writer.WriteLine("Suma podzielnikow to:");
+                int sum = SumaPodzielnikow.Sum();
                 writer.WriteLine(sum);
-                //*******************************
-                //* TODO: Implement method body *
-                //*******************************
             }
                 reader.Close();
                 writer.Flush();
