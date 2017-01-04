@@ -25,32 +25,30 @@ namespace Spoj1Divisor_Summation
             //*******************************
             //* TODO: Implement method body *
             //*******************************
-            string inputNum;
-            string inputSize;
+            string inputNum, inputSize;
+            int quantity, number;
             var total = 0;
-            List<int> list = new List<int>();
+            List<int> ListOfNumbers = new List<int>();
             inputSize = reader.ReadLine();
-            var z = Convert.ToInt32(inputSize);
-            for (int k = 0; k < z; k++)
+            int.TryParse(inputSize, out quantity);
+
+            for (int k = 0; k < quantity; k++)
             {
                 inputNum = reader.ReadLine();
-                var number = Convert.ToInt32(inputNum);
+                int.TryParse(inputNum, out number);
                 for (var i = 1; i <= number; i++)
                 {
                     if (number % i == 0 && i != number)
                     {
-                        list.Add(i);
-
+                        ListOfNumbers.Add(i);
                     }
                 }
-                foreach (var item in list)
+                foreach (var item in ListOfNumbers)
                 {
-
                     total = 0;
-                    total = list.Sum();
-
+                    total = ListOfNumbers.Sum();
                 }
-                list.Clear();
+                ListOfNumbers.Clear();
                 writer.WriteLine(total);
             }
             reader.Close();
