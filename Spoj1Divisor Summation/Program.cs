@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Spoj1Divisor_Summation
 {
@@ -27,14 +24,15 @@ namespace Spoj1Divisor_Summation
             informationWriter.WriteLine("Inputs\n==============");
             informationWriter.Flush();
 
+            string resultString = reader.ReadLine();
+
             try
-            {
-                string resultString = reader.ReadLine();
-                int length = int.Parse(resultString);
+            {   
+                int length = Convert.ToInt32(resultString);
                 for (int i = 0; i < length; i++)
                 {
                     resultString = reader.ReadLine();
-                    int number = int.Parse(resultString);
+                    int number = Convert.ToInt32(resultString);
                     writer.WriteLine(CalculateSumOfDivisors(number));
                 }
 
@@ -51,22 +49,19 @@ namespace Spoj1Divisor_Summation
             reader.Close();
             writer.Flush();
             writer.Close();
-
-
         }
 
-        public static int CalculateSumOfDivisors(int number)
+        private static int CalculateSumOfDivisors(int number)
         {
-          
             if (number < MinRange || number > MaxRange) throw new OutOfRangeNumberExepction(number);
 
             int sum = 0;
-
-            for (int i = 1; i < number; i++)
+            
+            for (int divider = 1; divider < number; divider++)
             {
-                if (number % i == 0)
+                if (number % divider == 0)
                 {
-                    sum += i;
+                    sum += divider;
                 }
             }
 
