@@ -30,10 +30,10 @@ namespace Spoj1Divisor_Summation
 
         private static void ValidateAndCountDivisorSumationFromInputNumbers(TextReader reader, TextWriter writer)
         {
-            int amountOfInputs = 0;
             bool isNumber = false;
             do
             {
+                int amountOfInputs = 0;
                 string textFromInput = reader.ReadLine();
                 isNumber = int.TryParse(textFromInput, out amountOfInputs);
                 if (isNumber) CalculateSumsDivisorForNumbers(amountOfInputs, reader, writer);
