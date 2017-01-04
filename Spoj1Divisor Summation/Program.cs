@@ -30,52 +30,38 @@ namespace Spoj1Divisor_Summation
                 int length = int.Parse(resultString);
                 for (int i = 0; i < length; i++)
                 {
-                   resultString = reader.ReadLine();
-                   int number = int.Parse(resultString);
-                   writer.WriteLine(CountSumOfDivisors(number));
+                    resultString = reader.ReadLine();
+                    int number = int.Parse(resultString);
+                    writer.WriteLine(CalculateSumOfDivisors(number));
                 }
 
             }
-            catch (OutOfRangeNumberExepction e)
+            catch (Exception e)
             {
                 writer.WriteLine(e.Message);
             }
-            catch (ArgumentNullException e)
-            {
-                writer.WriteLine(e.Message);
-            }
-            catch (OverflowException e)
-            {
-                writer.WriteLine(e.Message);
-            }
-            catch (FormatException e)
-            {
-                writer.WriteLine(e.Message);
-            }
-           
 
-            finally
-            {
-                informationWriter.WriteLine("\nOuput\n==============");
-                informationWriter.Flush();
-                informationWriter.Close();
+            informationWriter.WriteLine("\nOutput\n==============");
+            informationWriter.Flush();
+            informationWriter.Close();
 
-                reader.Close();
-                writer.Flush();
-                writer.Close();
-            }
-         
+            reader.Close();
+            writer.Flush();
+            writer.Close();
+
+
         }
 
-        private static int CountSumOfDivisors(int number)
-        { 
-            if (number < 1 || number > 500000) throw new OutOfRangeNumberExepction(number);
+        public static int CalculateSumOfDivisors(int number)
+        {
+            const int minRange = 1, maxRange = 500000;
+            if (number < minRange || number > maxRange) throw new OutOfRangeNumberExepction(number);
 
             int sum = 0;
 
             for (int i = 1; i < number; i++)
             {
-                if ((number % i) == 0)
+                if (number % i == 0)
                 {
                     sum += i;
                 }
