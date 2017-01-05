@@ -6,8 +6,8 @@ namespace Spoj1Divisor_Summation
 {
     public class Program
     {
-        public const int MinRange = 1;
-        public const int MaxRange = 500000;
+        private const int MinRange = 1;
+        private const int MaxRange = 500000;
 
         public static void Main()
         {
@@ -20,26 +20,19 @@ namespace Spoj1Divisor_Summation
 
         public static void DivisorSumation(TextReader reader, TextWriter writer)
         {
-            WriteInformationAboutData("Input");
-            ValidateAndCountDivisorSumationFromInputNumbers(reader, writer);
-            WriteInformationAboutData("Output");
-            reader.Close();
-            writer.Flush();
-            writer.Close();
-        }
-
-        private static void ValidateAndCountDivisorSumationFromInputNumbers(TextReader reader, TextWriter writer)
-        {
-            bool isNumber = false;
+            bool isNumber;
 
             do
             {
-                int amountOfInputs = 0;
+                int amountOfInputs;
                 string textFromInput = reader.ReadLine();
                 isNumber = int.TryParse(textFromInput, out amountOfInputs);
                 if (isNumber) CalculateSumsDivisorForNumbers(amountOfInputs, reader, writer);
             } while (!isNumber);
 
+            reader.Close();
+            writer.Flush();
+            writer.Close();
         }
 
         private static void CalculateSumsDivisorForNumbers(int amountOfInputs, TextReader reader, TextWriter writer)
@@ -47,21 +40,11 @@ namespace Spoj1Divisor_Summation
             for (int i = 0; i < amountOfInputs; i++)
             {
                 string textFromInput = reader.ReadLine();
-                int number = 0;
+                int number;
                 int.TryParse(textFromInput, out number);
                 if (number < MinRange || number > MaxRange) continue;
                 writer.WriteLine(CalculateSumOfDivisorsForNumber(number));
             }
-
-            
-        }
-
-        private static void WriteInformationAboutData(string information)
-        {
-            var informationWriter = new StreamWriter(Console.OpenStandardOutput());
-            informationWriter.WriteLine(information + "\n==============");
-            informationWriter.Flush();
-            informationWriter.Close();
         }
 
         private static int CalculateSumOfDivisorsForNumber(int number)
