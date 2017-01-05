@@ -10,8 +10,8 @@ namespace Spoj1Divisor_Summation
 {
     public class Program
     {
-        public static List<int> Inputy = new List<int>();
-        public static List<int> Outputy = new List<int>();
+        public static List<int> Inputs = new List<int>();
+        public static List<int> Outputs = new List<int>();
         public static void Main()
         {
             var reader = new StreamReader(Console.OpenStandardInput());
@@ -19,7 +19,6 @@ namespace Spoj1Divisor_Summation
             writer.AutoFlush = false;
 
             DivisorSumation(reader, writer);
-            Console.ReadKey();
         }
         public static void DivisorSumation(TextReader reader, TextWriter writer)
         {
@@ -28,79 +27,47 @@ namespace Spoj1Divisor_Summation
             //*******************************
             Console.WriteLine("Inputs");
             TakeInputs(reader);
-            GiveOutputs();
+
+            CalculateDividersSums();
+
             Console.WriteLine("\nOutputs:");
-            foreach (var dana in Outputy)
+            for (int number = 0; number < Outputs.Count; number++)
             {
-                writer.WriteLine(dana);
+                writer.WriteLine(Outputs[number]);
             }
+
             reader.Close();
             writer.Flush();
             writer.Close();
         }
-        public static void TakeInputs(TextReader reader)
+        private static void TakeInputs(TextReader reader)
         {
-            var ileRekordów = 0;
-            while (ileRekordów == 0)
+            bool isNumber = false;
+            while (!isNumber)
             {
-                try
+                string inputDataString = reader.ReadLine();
+                int inputNumber = 0;
+                isNumber = int.TryParse(inputDataString, out inputNumber);
+                for (int i = 0; i < inputNumber; i++)
                 {
-                    ileRekordów = int.Parse(reader.ReadLine());
-                }
-                catch (FormatException)
-                {
-                    ileRekordów = 0;
-                }
-                catch (ArgumentNullException)
-                {
-                    ileRekordów = 0;
-                }
-                catch (OverflowException)
-                {
-                    ileRekordów = 0;
-                }
-            }
-
-            for (int i = 0; i < ileRekordów; i++)
-            {
-                try
-                {
-                    int liczba = int.Parse(reader.ReadLine());
-                    Inputy.Add(liczba);
-                }
-                catch (FormatException)
-                {
-                }
-                catch (ArgumentNullException)
-                {
-                }
-                catch (OverflowException)
-                {
+                    int number = int.Parse(reader.ReadLine());
+                    Inputs.Add(number);
                 }
             }
         }
-        private static void GiveOutputs()
+
+        private static void CalculateDividersSums()
         {
-            foreach (var liczba in Inputy)
+            for (int value = 0; value < Inputs.Count; value++)
             {
-                int suma = 0;
-                int pierwiastek = (int)Math.Sqrt(liczba);
-                if (liczba >= 1 && liczba <= 500000)
+                int dividersSum = 0;
+                if (Inputs[value] >= 1 && Inputs[value] <= 500000)
                 {
-                    for (int i = 1; i < pierwiastek; ++i)
+                    for (int divider = 1; divider < Inputs[value]; divider++)
                     {
-                        bool czyPodzielna = liczba % i == 0;
-                        if (czyPodzielna)
-                        {
-                            suma += i + pierwiastek / i;
-                        }
-                        if (i == pierwiastek)
-                        {
-                            suma += i;
-                        }
+                        dividersSum += Inputs[value] % divider == 0 ? divider : 0;
                     }
-                    suma -= pierwiastek;
-                    Outputy.Add(suma);
+                    Outputs.Add(dividersSum);
                 }
             }
         }
