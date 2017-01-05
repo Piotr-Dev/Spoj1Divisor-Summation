@@ -42,7 +42,7 @@ namespace Spoj1Divisor_Summation
 
             throw new ArgumentException
             (
-                "Wrong argument exception\nYour input should be a number in right range beetween" +
+                "Wrong argument exception\nYour input should be a number in right range beetween " +
                 MinRange + "-" + MaxRange +
                 "\nInput: " + textFromInput
             );
