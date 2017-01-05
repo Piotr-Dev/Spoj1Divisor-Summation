@@ -13,79 +13,59 @@ namespace Spoj1Divisor_Summation
         {
             try
             {
-                Console.WriteLine("Input:");
-                var reader = new StringReader(NumberInput());
-
-                Console.WriteLine(" \nOutput:");
+                var reader = new StreamReader(Console.OpenStandardInput());
                 var writer = new StreamWriter(Console.OpenStandardOutput());
                 writer.AutoFlush = false;
-
+                
                 DivisorSumation(reader, writer);
+
+                reader.Close();
+                writer.Flush();
+                writer.Close();
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-            }        
+            }
             Console.ReadKey();
         }
 
         public static void DivisorSumation(TextReader reader, TextWriter writer)
-        {           
-            int numberCount = Convert.ToInt32(reader.ReadLine());
-
-            for (int i = 0; i < numberCount; i++)
-            {            
-                int number = Convert.ToInt32(reader.ReadLine());
-                List<int> divisors = CalculateDivisors(number);         
-                writer.WriteLine(divisors.Sum());
-            }
-
-            reader.Close();
-            writer.Flush();
-            writer.Close();
-        }
-
-        private static List<int>CalculateDivisors(int number)
         {
-            List<int> divisors = new List<int>();
-
-            for (int i = 1; i < number; i++)
-                if ((number % i) == 0) divisors.Add(i);
-
-            return divisors;
+            var inputCount = Convert.ToInt32(reader.ReadLine());
+            ValidateInputNumber(inputCount);
+            DivisorSumationCalculation(inputCount,reader,writer);
         }
 
-
-        public static string NumberInput()
-        {
-            int inputCount = Convert.ToInt32(Console.ReadLine());
-            const int minInputCount = 1;
-
-            if (inputCount <= minInputCount) throw new Exception("Incorrect input");
-
-            var inputNumbers = new StringBuilder();
-            inputNumbers.AppendLine(inputCount.ToString());
-
-            for (int i = 0; i < inputCount; i++)
-            {
-                int number = Convert.ToInt32(Console.ReadLine());
-
-                if (IsValidInputNumber(number)) throw new Exception("Incorrect input (must be (1 <= n <= 500000))");
-                inputNumbers.AppendLine(number.ToString());
-            }
-
-            return inputNumbers.ToString();
-        }
-
-        private static bool IsValidInputNumber(int inputNumber)
+        private static void ValidateInputNumber(int inputNumber)
         {
             const int lowerLimit = 1;
             const int upperLimit = 500000;
 
-            if (inputNumber < lowerLimit) return false;
-            if (inputNumber > upperLimit) return false;
-            return true;
+            if (inputNumber < lowerLimit) throw new Exception("Incorrect input (must be greather than 1)");
+            if (inputNumber > upperLimit) throw new Exception("Incorrect input (must be smaller than 500000))");
         }
 
+        private static void DivisorSumationCalculation(int numberCount,TextReader reader, TextWriter writer)
+        {
+            for (int i = 0; i < numberCount; i++)
+            {
+                var number = Convert.ToInt32(reader.ReadLine());
+                writer.WriteLine(CalculateDivisors(number).Sum());
+            }
+        }
+
+        private static List<int>CalculateDivisors(int number)
+        {
+            var divisors = new List<int>();
+
+            for (int divisorCandidate = 1; divisorCandidate < number; divisorCandidate++)
+            {
+                bool isDivisor = ((number % divisorCandidate) == 0);
+                if (isDivisor) divisors.Add(divisorCandidate);
+            }
+
+            return divisors;
+        }
     }
 }
