@@ -20,15 +20,15 @@ namespace Spoj1Divisor_Summation
 
         public static void DivisorSumation(TextReader reader, TextWriter writer)
         {
-            bool isNumber;
+            var isFirstInputIsANumber = false;
 
             do
             {
-                var amountOfInputs = 0;
+                var firstInputInteger = 0;
                 var textFromInput = reader.ReadLine();
-                isNumber = ValidateDataFromInput(textFromInput, ref amountOfInputs);
-                if (isNumber) CalculateSumsDivisorForNumbers(amountOfInputs, reader, writer);
-            } while (!isNumber);
+                isFirstInputIsANumber = ValidateDataFromInput(textFromInput, ref firstInputInteger);
+                if (isFirstInputIsANumber) CalculateSumsDivisorForNumbers(firstInputInteger, reader, writer);
+            } while (!isFirstInputIsANumber);
 
             reader.Close();
             writer.Flush();
@@ -41,9 +41,9 @@ namespace Spoj1Divisor_Summation
             return isNumber;
         }
 
-        private static void CalculateSumsDivisorForNumbers(int amountOfInputs, TextReader reader, TextWriter writer)
+        private static void CalculateSumsDivisorForNumbers(int amountOfNumbers, TextReader reader, TextWriter writer)
         {
-            for (int i = 0; i < amountOfInputs; i++)
+            for (int i = 0; i < amountOfNumbers; i++)
             {
                 var textFromInput = reader.ReadLine();
                 var number = 0;
