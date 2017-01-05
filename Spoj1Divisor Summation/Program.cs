@@ -39,8 +39,14 @@ namespace Spoj1Divisor_Summation
                 var inRange = number >= MinRange && number <= MaxRange;
                 if(inRange) return true;
             }
-            
-            throw new ArgumentException("Wrong argument exception\nYour input should be a number in right range \nInput: "+textFromInput);
+
+            throw new ArgumentException
+            (
+                "Wrong argument exception\nYour input should be a number in right range beetween" +
+                MinRange + "-" + MaxRange +
+                "\nInput: " + textFromInput
+            );
+
         }
 
         private static void CalculateSumsDivisorForNumbers(int amountOfNumbers, TextReader reader, TextWriter writer)
