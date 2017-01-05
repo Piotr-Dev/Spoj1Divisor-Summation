@@ -22,10 +22,8 @@ namespace Spoj1Divisor_Summation
 
         public static void DivisorSumation(TextReader reader, TextWriter writer)
         {
-            int number = 0, quantity = 0;
-            const int maxRange = 500000, minRange = 1;
             var inputString = new StreamWriter(Console.OpenStandardOutput());
-            var outputString = new StreamWriter(Console.OpenStandardOutput());
+            int quantity;
             inputString.WriteLine("Input:");
             inputString.Flush();
             bool validQuantity = int.TryParse(reader.ReadLine(), out quantity);
@@ -37,6 +35,8 @@ namespace Spoj1Divisor_Summation
             }
             for (int size = 0; size < quantity; size++)
             {
+                int number;
+                const int maxRange = 500000, minRange = 1;
                 bool validNumber = int.TryParse(reader.ReadLine(), out number) && number < maxRange && number > minRange;
                 while (!validNumber)
                 {
@@ -46,17 +46,17 @@ namespace Spoj1Divisor_Summation
                 }
                 writer.WriteLine(GetTotalSumOfProperDivisors(number));
             }
-
+            var outputString = new StreamWriter(Console.OpenStandardOutput());
             outputString.WriteLine("Output:");
             outputString.Flush();
             reader.Close();
             writer.Flush();
             writer.Close();
         }
+
         public static int GetTotalSumOfProperDivisors(int number)
         {
             int sum = 0, total = 0;
-            
             for (int divisor = 1; divisor < number; divisor++)
             {
                 if (number % divisor == 0)
