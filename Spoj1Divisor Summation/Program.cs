@@ -31,6 +31,7 @@ namespace Spoj1Divisor_Summation
         private static void ValidateAndCountDivisorSumationFromInputNumbers(TextReader reader, TextWriter writer)
         {
             bool isNumber = false;
+
             do
             {
                 int amountOfInputs = 0;
@@ -43,12 +44,12 @@ namespace Spoj1Divisor_Summation
 
         private static void CalculateSumsDivisorForNumbers(int amountOfInputs, TextReader reader, TextWriter writer)
         {
-            string textFromInput = string.Empty;
+            
             int number = 0;
 
             for (int i = 0; i < amountOfInputs; i++)
             {
-                textFromInput = reader.ReadLine();
+                string textFromInput = reader.ReadLine();
                 int.TryParse(textFromInput, out number);
                 if (number < MinRange || number > MaxRange) continue;
                 writer.WriteLine(CalculateSumOfDivisorsForNumber(number));
