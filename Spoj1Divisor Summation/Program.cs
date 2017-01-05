@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,22 +18,13 @@ namespace Spoj1Divisor_Summation
             writer.AutoFlush = false;
 
             DivisorSumation(reader, writer);
+            Console.ReadKey();
         }
         public static void DivisorSumation(TextReader reader, TextWriter writer)
         {
-            //*******************************
-            //* TODO: Implement method body *
-            //*******************************
-            Console.WriteLine("Inputs");
             TakeInputs(reader);
-
             CalculateDividersSums();
-
-            Console.WriteLine("\nOutputs:");
-            for (int number = 0; number < Outputs.Count; number++)
-            {
-                writer.WriteLine(Outputs[number]);
-            }
+            PrintOutputs(writer);
 
             reader.Close();
             writer.Flush();
@@ -42,33 +32,37 @@ namespace Spoj1Divisor_Summation
         }
         private static void TakeInputs(TextReader reader)
         {
-            bool isNumber = false;
-            while (!isNumber)
+            var inputDataString = reader.ReadLine();
+            var inputsNumber = int.Parse(inputDataString);
+
+            for (int i = 0; i < inputsNumber; i++)
             {
-                string inputDataString = reader.ReadLine();
-                int inputNumber = 0;
-                isNumber = int.TryParse(inputDataString, out inputNumber);
-                for (int i = 0; i < inputNumber; i++)
-                {
-                    int number = int.Parse(reader.ReadLine());
-                    Inputs.Add(number);
-                }
+                var liczba = int.Parse(reader.ReadLine());
+                Inputs.Add(liczba);
             }
         }
 
         private static void CalculateDividersSums()
         {
-            for (int value = 0; value < Inputs.Count; value++)
+            foreach (var number in Inputs)
             {
                 int dividersSum = 0;
-                if (Inputs[value] >= 1 && Inputs[value] <= 500000)
+                if (number >= 1 && number <= 500000)
                 {
-                    for (int divider = 1; divider < Inputs[value]; divider++)
+                    for (int divider = 1; divider < number; divider++)
                     {
-                        dividersSum += Inputs[value] % divider == 0 ? divider : 0;
+                        dividersSum += number % divider == 0 ? divider : 0;
                     }
                     Outputs.Add(dividersSum);
                 }
+            }
+        }
+
+        private static void PrintOutputs(TextWriter writer)
+        {
+            foreach (var number in Outputs)
+            {
+                writer.WriteLine(number);
             }
         }
     }
