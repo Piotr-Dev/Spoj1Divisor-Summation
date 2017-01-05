@@ -19,29 +19,37 @@ namespace Spoj1Divisor_Summation
         }
         public static void DivisorSumation(TextReader reader, TextWriter writer)
         {
-            int IloscLiczb = Convert.ToInt32(reader.ReadLine());
-            for (int i = 0; i < IloscLiczb; i++)
-            {
-                int input = Convert.ToInt32(reader.ReadLine());
-                int Podzielnik = 1;
-                List<int> SumaPodzielnikow = new List<int>();
-                while (Podzielnik < input)
-                {
-                    int b = input % Podzielnik;
-                    if (b == 0)
-                    {
-                        SumaPodzielnikow.Add(Podzielnik);
-                    }
-                    Podzielnik++;
-                }
-                int sum = SumaPodzielnikow.Sum();
-                writer.WriteLine(sum);
-            }
+            LiczbaPowtorzenObliczen(reader, writer);
                 reader.Close();
                 writer.Flush();
                 writer.Close();
 
+        }
+        public static void LiczbaPowtorzenObliczen(TextReader reader, TextWriter writer)
+        {
+            int IloscLiczb = Convert.ToInt32(reader.ReadLine());
+            for (int i = 0; i < IloscLiczb; i++)
+            {
+                DodaniePodzielnikow(reader, writer);
             }
+        }
+        public static void DodaniePodzielnikow(TextReader reader, TextWriter writer)
+        {
+            int input = Convert.ToInt32(reader.ReadLine());
+            int Podzielnik = 1;
+            List<int> SumaPodzielnikow = new List<int>();
+            while (Podzielnik < input)
+            {
+                int b = input % Podzielnik;
+                if (b == 0)
+                {
+                    SumaPodzielnikow.Add(Podzielnik);
+                }
+                Podzielnik++;
+            }
+            int sum = SumaPodzielnikow.Sum();
+            writer.WriteLine(sum);
+        }
         
     }
 }
