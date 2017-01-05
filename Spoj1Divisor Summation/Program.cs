@@ -51,7 +51,8 @@ namespace Spoj1Divisor_Summation
                 {
                     for (int divider = 1; divider < number; divider++)
                     {
-                        dividersSum += number % divider == 0 ? divider : 0;
+                        bool isDividable = number % divider == 0;
+                        dividersSum += isDividable ? divider : 0;
                     }
                     Outputs.Add(dividersSum);
                 }
