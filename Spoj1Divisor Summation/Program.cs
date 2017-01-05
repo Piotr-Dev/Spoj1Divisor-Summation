@@ -22,60 +22,52 @@ namespace Spoj1Divisor_Summation
 
         public static void DivisorSumation(TextReader reader, TextWriter writer)
         {
-            string inputNumber, inputSize;
-            int number = 0;
-            int quantity = 0;
+            int number = 0, quantity = 0;
+            const int maxRange = 500000, minRange = 1;
             var inputString = new StreamWriter(Console.OpenStandardOutput());
             var outputString = new StreamWriter(Console.OpenStandardOutput());
             inputString.WriteLine("Input:");
             inputString.Flush();
-            inputSize = reader.ReadLine();
-            int.TryParse(inputSize, out quantity);
+            bool validQuantity = int.TryParse(reader.ReadLine(), out quantity);
+            while (!validQuantity)
+            {
+                inputString.WriteLine("Please enter a valid number.");
+                inputString.Flush();
+                validQuantity = int.TryParse(reader.ReadLine(), out quantity);
+            }
             for (int size = 0; size < quantity; size++)
             {
-                inputNumber = reader.ReadLine();
-                int.TryParse(inputNumber, out number);
+                bool validNumber = int.TryParse(reader.ReadLine(), out number) && number < maxRange && number > minRange;
+                while (!validNumber)
+                {
+                    inputString.WriteLine("Please enter a number between 1 and 500000.");
+                    inputString.Flush();
+                    validNumber = int.TryParse(reader.ReadLine(), out number) && number < maxRange && number > minRange;
+                }
                 writer.WriteLine(GetTotalSumOfProperDivisors(number));
             }
-            //outputString.WriteLine("Output:");
 
-
+            outputString.WriteLine("Output:");
             outputString.Flush();
             reader.Close();
             writer.Flush();
-            writer.Close();  
-        }
-
-        public static void ConvertToInt()
-        {
-
+            writer.Close();
         }
         public static int GetTotalSumOfProperDivisors(int number)
         {
-            List<int> ListOfNumbers = new List<int>();
-            int total= 0;
+            int sum = 0, total = 0;
             
             for (int divisor = 1; divisor < number; divisor++)
             {
                 if (number % divisor == 0)
                 {
-                    ListOfNumbers.Add(divisor);
+                    total += sum + divisor;
                 }
             }
-
-            foreach(var item in ListOfNumbers)
-            {
-                total = 0;
-                total = ListOfNumbers.Sum();
-
-            }
-            ListOfNumbers.Clear();
             return total;
         }
     }
 }
 
-
-//if (string.IsNullOrWhiteSpace(inputNum)) throw new ArgumentNullException("test");
 
 
