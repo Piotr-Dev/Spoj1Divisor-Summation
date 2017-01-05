@@ -40,8 +40,8 @@ namespace Spoj1Divisor_Summation
             var SumaPodzielnikow = new List<int>();
             while (podzielnik < liczba)
             {
-                int b = liczba % podzielnik;
-                if (b == 0)
+                int Reszta = liczba % podzielnik;
+                if (Reszta == 0)
                 {
                     SumaPodzielnikow.Add(podzielnik);
                 }
