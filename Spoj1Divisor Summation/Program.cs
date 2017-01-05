@@ -38,7 +38,13 @@ namespace Spoj1Divisor_Summation
         private static bool ValidateDataFromInput(string textFromInput,ref int number)
         {
             var isNumber = int.TryParse(textFromInput, out number);
-            return isNumber;
+            if (isNumber)
+            {
+                var inRange = number >= MinRange && number <= MaxRange;
+                if(inRange) return true;
+            }
+            
+            return false;
         }
 
         private static void CalculateSumsDivisorForNumbers(int amountOfNumbers, TextReader reader, TextWriter writer)
@@ -47,8 +53,8 @@ namespace Spoj1Divisor_Summation
             {
                 var textFromInput = reader.ReadLine();
                 var number = 0;
-                ValidateDataFromInput(textFromInput, ref number);
-                if (number < MinRange || number > MaxRange) continue;
+                var isNotValid = !ValidateDataFromInput(textFromInput, ref number);
+                if (isNotValid) continue;
                 writer.WriteLine(CalculateSumOfDivisorsForNumber(number));
             }
         }
