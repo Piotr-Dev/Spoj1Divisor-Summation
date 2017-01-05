@@ -44,12 +44,10 @@ namespace Spoj1Divisor_Summation
 
         private static void CalculateSumsDivisorForNumbers(int amountOfInputs, TextReader reader, TextWriter writer)
         {
-            
-            int number = 0;
-
             for (int i = 0; i < amountOfInputs; i++)
             {
                 string textFromInput = reader.ReadLine();
+                int number = 0;
                 int.TryParse(textFromInput, out number);
                 if (number < MinRange || number > MaxRange) continue;
                 writer.WriteLine(CalculateSumOfDivisorsForNumber(number));
