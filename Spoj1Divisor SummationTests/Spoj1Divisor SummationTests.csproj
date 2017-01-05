@@ -46,13 +46,16 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
   <ItemGroup>
     <Compile Include="ProgramTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TryParseTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Spoj1Divisor Summation\Spoj1Divisor Summation.csproj">
