@@ -32,6 +32,7 @@ namespace Spoj1Divisor_Summation
         public static void DivisorSumation(TextReader reader, TextWriter writer)
         {           
             int numberCount = Convert.ToInt32(reader.ReadLine());
+
             for (int i = 0; i < numberCount; i++)
             {            
                 int number = Convert.ToInt32(reader.ReadLine());
@@ -47,16 +48,20 @@ namespace Spoj1Divisor_Summation
         private static List<int>CalculateDivisors(int number)
         {
             List<int> divisors = new List<int>();
+
             for (int i = 1; i < number; i++)
                 if ((number % i) == 0) divisors.Add(i);
 
             return divisors;
         }
 
+
         public static string NumberInput()
-        {         
+        {
             int inputCount = Convert.ToInt32(Console.ReadLine());
-            if (inputCount < 0) throw new Exception("Incorrect input");
+            const int minInputCount = 1;
+
+            if (inputCount <= minInputCount) throw new Exception("Incorrect input");
 
             var inputNumbers = new StringBuilder();
             inputNumbers.AppendLine(inputCount.ToString());
@@ -64,9 +69,11 @@ namespace Spoj1Divisor_Summation
             for (int i = 0; i < inputCount; i++)
             {
                 int number = Convert.ToInt32(Console.ReadLine());
+
                 if (IsValidInputNumber(number)) throw new Exception("Incorrect input (must be (1 <= n <= 500000))");
                 inputNumbers.AppendLine(number.ToString());
             }
+
             return inputNumbers.ToString();
         }
 
@@ -74,6 +81,7 @@ namespace Spoj1Divisor_Summation
         {
             const int lowerLimit = 1;
             const int upperLimit = 500000;
+
             if (inputNumber < lowerLimit) return false;
             if (inputNumber > upperLimit) return false;
             return true;
