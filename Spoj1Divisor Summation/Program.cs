@@ -23,30 +23,31 @@ namespace Spoj1Divisor_Summation
             var firstInputInteger = 0;
             var textFromInput = reader.ReadLine();
 
-            var isFirstInputIsANumber = ValidateDataFromInput(textFromInput, ref firstInputInteger);
-            if (isFirstInputIsANumber) CalculateSumsDivisorForNumbers(firstInputInteger, reader, writer);
+           ValidateDataFromInput(textFromInput, ref firstInputInteger);
+           CalculateSumsDivisorForNumbers(firstInputInteger, reader, writer);
           
             reader.Close();
             writer.Flush();
             writer.Close();
         }
 
-        private static bool ValidateDataFromInput(string textFromInput,ref int number)
+        private static void ValidateDataFromInput(string textFromInput,ref int number)
+        {
+            var isNotNumber = !TryParseStringToNumber(textFromInput,ref number);
+            if(isNotNumber) throw new ArgumentException($"Input value: {textFromInput} is not a number or not in range: {MinRange}-{MaxRange}");
+
+        }
+
+        private static bool TryParseStringToNumber(string textFromInput, ref int number)
         {
             var isNumber = int.TryParse(textFromInput, out number);
             if (isNumber)
             {
                 var inRange = number >= MinRange && number <= MaxRange;
-                if(inRange) return true;
+                if (inRange) return true;
             }
 
-            throw new ArgumentException
-            (
-                "Wrong argument exception\nYour input should be a number in right range beetween " +
-                MinRange + "-" + MaxRange +
-                "\nInput: " + textFromInput
-            );
-
+            return false;
         }
 
         private static void CalculateSumsDivisorForNumbers(int amountOfNumbers, TextReader reader, TextWriter writer)
