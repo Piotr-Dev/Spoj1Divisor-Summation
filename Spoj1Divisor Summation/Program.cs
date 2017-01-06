@@ -35,7 +35,6 @@ namespace Spoj1Divisor_Summation
         {
             var isNotNumber = !TryParseStringToNumber(textFromInput,ref number);
             if(isNotNumber) throw new ArgumentException($"Input value: {textFromInput} is not a number or not in range: {MinRange}-{MaxRange}");
-
         }
 
         private static bool TryParseStringToNumber(string textFromInput, ref int number)
