@@ -40,7 +40,7 @@ namespace Spoj1Divisor_Summation
         private static bool ValidateDataFromInput(int number)
         {
             var isNotInRange = number < MinRange || number > MaxRange;
-            if (isNotInRange) throw new ArgumentOutOfRangeException($"Input {number} not in range: {MinRange}-{MaxRange}");
+            if (isNotInRange) throw new ArgumentOutOfRangeException("number", $"Input {number} not in range: {MinRange}-{MaxRange}");
 
             return true;
         }
