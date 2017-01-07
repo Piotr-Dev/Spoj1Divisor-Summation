@@ -32,21 +32,15 @@ namespace Spoj1Divisor_Summation
 
         private static int TakeDataFromInput(string textFromInput)
         {
-            var number = 0;
-
-            var isNotNumber = !ValidateDataFromInput(textFromInput,ref number);
-
-            if(isNotNumber) throw new ArgumentException($"Input value: {textFromInput} is not a number or not in range: {MinRange}-{MaxRange}");
-
+            var number = int.Parse(textFromInput);
+            ValidateDataFromInput(number);      
             return number;
         }
 
-        private static bool ValidateDataFromInput(string textFromInput, ref int number)
+        private static bool ValidateDataFromInput(int number)
         {
-            var isNotNumber = !int.TryParse(textFromInput, out number);
-            if (isNotNumber) return false;
             var isNotInRange = number < MinRange || number > MaxRange;
-            if (isNotInRange) return false;
+            if (isNotInRange) throw new ArgumentOutOfRangeException($"Input {number} not in range: {MinRange}-{MaxRange}");
 
             return true;
         }
