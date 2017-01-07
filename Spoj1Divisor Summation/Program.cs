@@ -20,33 +20,35 @@ namespace Spoj1Divisor_Summation
 
         public static void DivisorSumation(TextReader reader, TextWriter writer)
         {
-            var firstInputInteger = 0;
-            var textFromInput = reader.ReadLine();
+           var textFromInput = reader.ReadLine();
 
-           ValidateDataFromInput(textFromInput, ref firstInputInteger);
-           CalculateSumsDivisorForNumbers(firstInputInteger, reader, writer);
+           var firstInputNumber = TakeDataFromInput(textFromInput);
+           CalculateSumsDivisorForNumbers(firstInputNumber, reader, writer);
           
             reader.Close();
             writer.Flush();
             writer.Close();
         }
 
-        private static void ValidateDataFromInput(string textFromInput,ref int number)
+        private static int TakeDataFromInput(string textFromInput)
         {
-            var isNotNumber = !TryParseStringToNumber(textFromInput,ref number);
+            var number = 0;
+
+            var isNotNumber = !ValidateDataFromInput(textFromInput,ref number);
+
             if(isNotNumber) throw new ArgumentException($"Input value: {textFromInput} is not a number or not in range: {MinRange}-{MaxRange}");
+
+            return number;
         }
 
-        private static bool TryParseStringToNumber(string textFromInput, ref int number)
+        private static bool ValidateDataFromInput(string textFromInput, ref int number)
         {
-            var isNumber = int.TryParse(textFromInput, out number);
-            if (isNumber)
-            {
-                var inRange = number >= MinRange && number <= MaxRange;
-                if (inRange) return true;
-            }
+            var isNotNumber = !int.TryParse(textFromInput, out number);
+            if (isNotNumber) return false;
+            var isNotInRange = number < MinRange || number > MaxRange;
+            if (isNotInRange) return false;
 
-            return false;
+            return true;
         }
 
         private static void CalculateSumsDivisorForNumbers(int amountOfNumbers, TextReader reader, TextWriter writer)
@@ -54,8 +56,7 @@ namespace Spoj1Divisor_Summation
             for (int i = 0; i < amountOfNumbers; i++)
             {
                 var textFromInput = reader.ReadLine();
-                var number = 0;
-                ValidateDataFromInput(textFromInput, ref number);
+                var number = TakeDataFromInput(textFromInput);
                 writer.WriteLine(CalculateSumOfDivisorsForNumber(number));
             }
         }
