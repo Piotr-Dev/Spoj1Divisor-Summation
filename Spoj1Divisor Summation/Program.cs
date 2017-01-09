@@ -25,28 +25,25 @@ namespace Spoj1Divisor_Summation
         public static void DivisorSumation(TextReader reader, TextWriter writer)
         {
 
-            GetAllDivisorsSumation(reader, writer);
+            var inputQuantity = GetInputedNumber(reader.ReadLine());
+
+            for (var size = 0; size < inputQuantity; size++)
+            {
+                int inputedNumber = GetInputedNumber(reader.ReadLine());
+                writer.WriteLine(GetSumOfProperDivisors(inputedNumber));
+            }
+
             reader.Close();
             writer.Flush();
             writer.Close();
         }
 
-        public static void GetAllDivisorsSumation(TextReader reader, TextWriter writer)
-        {
-            var inputQuantity = GetNumber(reader.ReadLine());
 
-            for (var size = 0; size < inputQuantity; size++)
-            {
-                int inputedNumber = GetNumber(reader.ReadLine());
-                writer.WriteLine(GetSumOfProperDivisors(inputedNumber));
-            }
-        }
-
-        public static int GetNumber(string inputedNumber)
+        public static int GetInputedNumber(string number)
         {
-            var inputNumber = int.Parse(inputedNumber);
-            ValidateInputedNumbers(inputNumber);
-            return inputNumber;
+            var inputedNumber = int.Parse(number);
+            ValidateInputedNumbers(inputedNumber);
+            return inputedNumber;
         }
 
         public static void ValidateInputedNumbers(int inputedNumber)
@@ -55,13 +52,13 @@ namespace Spoj1Divisor_Summation
             while (!isValidRange) throw new Exception($"Invalid input: Please enter a number between {MinRange} and {MaxRange}");
         }
 
-        public static int GetSumOfProperDivisors(int number)
+        public static int GetSumOfProperDivisors(int inputedNumber)
         {
             var sum = 0;
 
-            for (var divisor = 1; divisor < number; divisor++)
+            for (var divisor = 1; divisor < inputedNumber; divisor++)
             {
-                var isProperDivisor = number % divisor == 0;
+                var isProperDivisor = inputedNumber % divisor == 0;
 
                 if (isProperDivisor)
                 {
