@@ -13,7 +13,7 @@ namespace Spoj1Divisor_Summation.Tests
     public class ProgramTests
     {
         [TestMethod()]
-        public void Divisor_Sumation_Result_Correctness_Test() 
+        public void Divisor_Sumation_Result_Correctness_Test()
         {
             // Arrange
             var consoleInput = new StringReader(InputTestData());
@@ -31,7 +31,6 @@ namespace Spoj1Divisor_Summation.Tests
         private static string ExpectedResult()
         {
             var expectedResult = new StringBuilder();
-            expectedResult.AppendLine("0");
             expectedResult.AppendLine("0");
             expectedResult.AppendLine("1");
             expectedResult.AppendLine("1");
@@ -150,8 +149,7 @@ namespace Spoj1Divisor_Summation.Tests
         {
             var inputTestData = new StringBuilder();
 
-            inputTestData.AppendLine("111");
-            inputTestData.AppendLine("0");
+            inputTestData.AppendLine("110");
             inputTestData.AppendLine("1");
             inputTestData.AppendLine("2");
             inputTestData.AppendLine("3");
