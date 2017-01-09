@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Spoj1Divisor_Summation
 {
     public class Program
     {
+        public static List<int> Inputs = new List<int>();
+        public static List<int> Outputs = new List<int>();
+        public static Dictionary<int, int> CalcualatedDividers = new Dictionary<int, int>();
         public static void Main()
         {
             var reader = new StreamReader(Console.OpenStandardInput());
@@ -18,61 +23,74 @@ namespace Spoj1Divisor_Summation
 
         public static void DivisorSumation(TextReader reader, TextWriter writer)
         {
-            GetDividerSums(reader)
-                .ToList()
-                .ForEach(sum => writer.WriteLine(sum));
+            TakeInputs(reader);
+            CalculateDividersSums();
+            PrintOutputs(writer);
 
             reader.Close();
             writer.Flush();
             writer.Close();
         }
 
-        private static IEnumerable<int> GetDividerSums(TextReader reader)
+        private static void TakeInputs(TextReader reader)
         {
-            var inputCount = GetInputedNumber(reader.ReadLine());
+            var firstInputDataString = reader.ReadLine();
+            var inputsCount = int.Parse(firstInputDataString);
 
-            for (int i = 0; i < inputCount; i++)
+            for (int i = 0; i < inputsCount; i++)
             {
-                var inputNumber = GetInputedNumber(reader.ReadLine());
-
-                var dividersSum = GetDividers(inputNumber).Sum();
-
-                yield return dividersSum;
-            }
-        }
-
-        private static IEnumerable<int> GetDividers(int inputNumber)
-        {
-            for (int divider = 1; divider < inputNumber; divider++)
-            {
-                var isTrueDivider = inputNumber % divider == 0;
-
-                if (isTrueDivider)
                 {
-                    yield return divider;
+                    var liczba = int.Parse(reader.ReadLine());
+                    Inputs.Add(liczba);
                 }
             }
         }
 
-        private static int GetInputedNumber(string inputString)
+        private static void CalculateDividersSums()
         {
-            var inputedNumber = int.Parse(inputString);
-
-            ValidateNumericInput(inputedNumber);
-
-            return inputedNumber;
+            var validInputs = Inputs.Where(ValidInput());
+            foreach (var number in validInputs)
+            {
+                Outputs.Add(SumDividers(number));
+            }
+        }
+        
+        private static Func<int, bool> ValidInput()
+        {
+            int minInput = 1;
+            int maxInput = 500000;
+            return x => x >= minInput && x < maxInput;
         }
 
-        private static void ValidateNumericInput(int input)
+        public static int SumDividers(int number)
         {
-            const int numericInputLowerRange = 0;
-            const int numericInputUpperRange = 50000;
+            int dividersSum = 0;
+            if (!CalcualatedDividers.ContainsKey(number))
+            {
+                for (int divider = 1; divider < number; divider++)
+                {
+                    bool isDividable = number % divider == 0;
+                    if (isDividable)
+                    {
+                        dividersSum += divider;
+                    }
+                }
+                CalcualatedDividers.Add(number, dividersSum);
+            }
+            else
+            {
+                dividersSum = CalcualatedDividers[number];
+            }
+            return dividersSum;
+        }
 
-            var isOutOfRange = input < numericInputLowerRange ||
-                               input > numericInputUpperRange;
-
-            if (isOutOfRange)
-                throw new ArgumentOutOfRangeException($"Expected range is ({numericInputLowerRange} , {numericInputUpperRange}) ");
+        private static void PrintOutputs(TextWriter writer)
+        {
+            foreach (var number in Outputs)
+            {
+                writer.WriteLine(number);
+            }
         }
     }
 }
+
