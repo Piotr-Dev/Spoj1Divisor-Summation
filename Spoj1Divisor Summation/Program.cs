@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Spoj1Divisor_Summation
 {
@@ -12,67 +14,42 @@ namespace Spoj1Divisor_Summation
             var reader = new StreamReader(Console.OpenStandardInput());
             var writer = new StreamWriter(Console.OpenStandardOutput());
             writer.AutoFlush = false;
-
             DivisorSumation(reader, writer);
+            Console.ReadLine();
         }
-
         public static void DivisorSumation(TextReader reader, TextWriter writer)
         {
-            GetDividerSums(reader)
-                .ToList()
-                .ForEach(sum => writer.WriteLine(sum));
+            ObliczSumyPodzielników(reader, writer);
+                reader.Close();
+                writer.Flush();
+                writer.Close();
 
-            reader.Close();
-            writer.Flush();
-            writer.Close();
         }
-
-        private static IEnumerable<int> GetDividerSums(TextReader reader)
+        public static void ObliczSumyPodzielników(TextReader reader, TextWriter writer)
         {
-            var inputCount = GetInputedNumber(reader.ReadLine());
-
-            for (int i = 0; i < inputCount; i++)
+            int iloscLiczb = Convert.ToInt32(reader.ReadLine());
+            for (int i = 0; i < iloscLiczb; i++)
             {
-                var inputNumber = GetInputedNumber(reader.ReadLine());
-
-                var dividersSum = GetDividers(inputNumber).Sum();
-
-                yield return dividersSum;
+                DodaniePodzielnikow(reader, writer);
             }
         }
-
-        private static IEnumerable<int> GetDividers(int inputNumber)
+        public static void DodaniePodzielnikow(TextReader reader, TextWriter writer)
         {
-            for (int divider = 1; divider < inputNumber; divider++)
+            int liczba = Convert.ToInt32(reader.ReadLine());
+            int podzielnik = 1;
+            var SumaPodzielnikow = new List<int>();
+            while (podzielnik < liczba)
             {
-                var isTrueDivider = inputNumber % divider == 0;
-
-                if (isTrueDivider)
+                int Reszta = liczba % podzielnik;
+                if (Reszta == 0)
                 {
-                    yield return divider;
+                    SumaPodzielnikow.Add(podzielnik);
                 }
+                podzielnik++;
             }
+            int Suma = SumaPodzielnikow.Sum();
+            writer.WriteLine(Suma);
         }
-
-        private static int GetInputedNumber(string inputString)
-        {
-            var inputedNumber = int.Parse(inputString);
-
-            ValidateNumericInput(inputedNumber);
-
-            return inputedNumber;
-        }
-
-        private static void ValidateNumericInput(int input)
-        {
-            const int numericInputLowerRange = 0;
-            const int numericInputUpperRange = 50000;
-
-            var isOutOfRange = input < numericInputLowerRange ||
-                               input > numericInputUpperRange;
-
-            if (isOutOfRange)
-                throw new ArgumentOutOfRangeException($"Expected range is ({numericInputLowerRange} , {numericInputUpperRange}) ");
-        }
+        
     }
 }
