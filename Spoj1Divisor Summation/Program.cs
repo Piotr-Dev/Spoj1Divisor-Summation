@@ -20,11 +20,17 @@ namespace Spoj1Divisor_Summation
 
         public static void DivisorSumation(TextReader reader, TextWriter writer)
         {
-           var inputString = reader.ReadLine();
+            var inputString = reader.ReadLine();
 
-           var inputCount = GetNumberFromInputString(inputString);
-           CalculateSumsDivisorForNumbers(inputCount, reader, writer);
-          
+            var inputCount = GetNumberFromInputString(inputString);
+
+            for (int i = 0; i < inputCount; i++)
+            {
+                inputString = reader.ReadLine();
+                var number = GetNumberFromInputString(inputString);
+                writer.WriteLine(CalculateSumOfDivisorsForNumber(number));
+            }
+
             reader.Close();
             writer.Flush();
             writer.Close();
@@ -41,16 +47,6 @@ namespace Spoj1Divisor_Summation
         {
             var isNotInRange = number < MinRange || number > MaxRange;
             if (isNotInRange) throw new ArgumentOutOfRangeException("number", $"Input {number} not in range: {MinRange}-{MaxRange}");
-        }
-
-        private static void CalculateSumsDivisorForNumbers(int inputCount, TextReader reader, TextWriter writer)
-        {
-            for (int i = 0; i < inputCount; i++)
-            {
-                var textFromInput = reader.ReadLine();
-                var number = GetNumberFromInputString(textFromInput);
-                writer.WriteLine(CalculateSumOfDivisorsForNumber(number));
-            }
         }
 
         private static int CalculateSumOfDivisorsForNumber(int number)
