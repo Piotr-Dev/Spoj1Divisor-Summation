@@ -19,7 +19,6 @@ namespace Spoj1Divisor_Summation
             writer.AutoFlush = false;
 
             DivisorSumation(reader, writer);
-            Console.ReadKey();
         }
         public static void DivisorSumation(TextReader reader, TextWriter writer)
         {
@@ -36,7 +35,9 @@ namespace Spoj1Divisor_Summation
             var firstInputDataString = reader.ReadLine();
             var inputsCount = int.Parse(firstInputDataString);
 
+
             for (int i = 0; i < inputsCount; i++)
+            {
             {
                 var liczba = int.Parse(reader.ReadLine());
                 Inputs.Add(liczba);
@@ -52,6 +53,7 @@ namespace Spoj1Divisor_Summation
             }
         }
 
+
         private static Func<int, bool> ValidInput()
         {
             int minInput = 1;
@@ -59,7 +61,10 @@ namespace Spoj1Divisor_Summation
             return x => x >= minInput && x < maxInput;
         }
 
+        }
+
         public static int SumDividers(int number)
+        {
         {
             int dividersSum = 0;
             for (int divider = 1; divider < number; divider++)
