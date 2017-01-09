@@ -1,0 +1,131 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
+namespace Spoj1Divisor_Summation
+{
+    public class Program
+    {
+        public const int MaxRange = 500000;
+        public const int MinRange = 1;
+        public static void Main()
+        {
+            var reader = new StreamReader(Console.OpenStandardInput());
+            var writer = new StreamWriter(Console.OpenStandardOutput());
+            writer.AutoFlush = false;
+
+
+            DivisorSumation(reader, writer);
+            Console.ReadKey();
+        }
+
+        public static void DivisorSumation(TextReader reader, TextWriter writer)
+        {
+<<<<<<< HEAD
+=======
+            GetDividerSums(reader)
+                .ToList()
+                .ForEach(sum => writer.WriteLine(sum));
+>>>>>>> master
+
+            GetAllDivisorsSumation(reader, writer);
+            reader.Close();
+            writer.Flush();
+            writer.Close();
+        }
+
+<<<<<<< HEAD
+        public static void GetAllDivisorsSumation(TextReader reader, TextWriter writer)
+        {
+            var inputQuantity = GetNumber(reader.ReadLine());
+
+            for (var size = 0; size < inputQuantity; size++)
+            {
+                int inputedNumber = GetNumber(reader.ReadLine());
+                writer.WriteLine(GetSumOfProperDivisors(inputedNumber));
+            }
+        }
+
+        public static int GetNumber(string inputedNumber)
+        {
+            var inputNumber = int.Parse(inputedNumber);
+            ValidateInputedNumbers(inputNumber);
+            return inputNumber;
+        }
+
+        public static void ValidateInputedNumbers(int inputedNumber)
+        {
+            bool isValidRange = inputedNumber < MaxRange && inputedNumber >= MinRange;
+            while (!isValidRange) throw new Exception($"Invalid input: Please enter a number between {MinRange} and {MaxRange}");
+        }
+
+        public static int GetSumOfProperDivisors(int number)
+        {
+            var sum = 0;
+
+            for (var divisor = 1; divisor < number; divisor++)
+            {
+                var isProperDivisor = number % divisor == 0;
+
+                if (isProperDivisor)
+                {
+                    sum += divisor;
+                }
+            }
+            return sum;
+
+=======
+        private static IEnumerable<int> GetDividerSums(TextReader reader)
+        {
+            var inputCount = GetInputedNumber(reader.ReadLine());
+
+            for (int i = 0; i < inputCount; i++)
+            {
+                var inputNumber = GetInputedNumber(reader.ReadLine());
+
+                var dividersSum = GetDividers(inputNumber).Sum();
+
+                yield return dividersSum;
+            }
+        }
+
+        private static IEnumerable<int> GetDividers(int inputNumber)
+        {
+            for (int divider = 1; divider < inputNumber; divider++)
+            {
+                var isTrueDivider = inputNumber % divider == 0;
+
+                if (isTrueDivider)
+                {
+                    yield return divider;
+                }
+            }
+        }
+
+        private static int GetInputedNumber(string inputString)
+        {
+            var inputedNumber = int.Parse(inputString);
+
+            ValidateNumericInput(inputedNumber);
+
+            return inputedNumber;
+        }
+
+        private static void ValidateNumericInput(int input)
+        {
+            const int numericInputLowerRange = 0;
+            const int numericInputUpperRange = 50000;
+
+            var isOutOfRange = input < numericInputLowerRange ||
+                               input > numericInputUpperRange;
+
+            if (isOutOfRange)
+                throw new ArgumentOutOfRangeException($"Expected range is ({numericInputLowerRange} , {numericInputUpperRange}) ");
+>>>>>>> master
+        }
+    }
+}
+
+
+
