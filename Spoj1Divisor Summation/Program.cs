@@ -14,7 +14,6 @@ namespace Spoj1Divisor_Summation
 
         public static void Main()
         {
-
             var reader = new StreamReader(Console.OpenStandardInput());
             var writer = new StreamWriter(Console.OpenStandardOutput());
             writer.AutoFlush = false;
