@@ -31,7 +31,7 @@ namespace Spoj1Divisor_Summation.Tests
         private static string ExpectedResult()
         {
             var expectedResult = new StringBuilder();
-
+            expectedResult.AppendLine("0");
             expectedResult.AppendLine("0");
             expectedResult.AppendLine("1");
             expectedResult.AppendLine("1");
@@ -132,6 +132,16 @@ namespace Spoj1Divisor_Summation.Tests
             expectedResult.AppendLine("73");
             expectedResult.AppendLine("57");
             expectedResult.AppendLine("117");
+            expectedResult.AppendLine("8");
+            expectedResult.AppendLine("1");
+            expectedResult.AppendLine("16");
+            expectedResult.AppendLine("1");
+            expectedResult.AppendLine("10");
+            expectedResult.AppendLine("9");
+            expectedResult.AppendLine("15");
+            expectedResult.AppendLine("1");
+            expectedResult.AppendLine("21");
+            expectedResult.AppendLine("1");
 
             return expectedResult.ToString();
         }
@@ -140,7 +150,8 @@ namespace Spoj1Divisor_Summation.Tests
         {
             var inputTestData = new StringBuilder();
 
-            inputTestData.AppendLine("100");
+            inputTestData.AppendLine("111");
+            inputTestData.AppendLine("0");
             inputTestData.AppendLine("1");
             inputTestData.AppendLine("2");
             inputTestData.AppendLine("3");
@@ -241,6 +252,16 @@ namespace Spoj1Divisor_Summation.Tests
             inputTestData.AppendLine("98");
             inputTestData.AppendLine("99");
             inputTestData.AppendLine("100");
+            inputTestData.AppendLine("10");
+            inputTestData.AppendLine("11");
+            inputTestData.AppendLine("12");
+            inputTestData.AppendLine("13");
+            inputTestData.AppendLine("14");
+            inputTestData.AppendLine("15");
+            inputTestData.AppendLine("16");
+            inputTestData.AppendLine("17");
+            inputTestData.AppendLine("18");
+            inputTestData.AppendLine("19");
 
             return inputTestData.ToString();
         }

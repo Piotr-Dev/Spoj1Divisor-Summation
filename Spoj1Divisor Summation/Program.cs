@@ -79,6 +79,13 @@ namespace Spoj1Divisor_Summation
             {
                 writer.WriteLine(divisorsSum);
             }
+            const int numericInputUpperRange = 50000;
+
+            var isOutOfRange = input < numericInputLowerRange ||
+                               input > numericInputUpperRange;
+
+            if (isOutOfRange)
+                throw new ArgumentOutOfRangeException($"Expected range is ({numericInputLowerRange} , {numericInputUpperRange}) ");
         }
     }
 }
