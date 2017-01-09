@@ -11,7 +11,7 @@ namespace Spoj1Divisor_Summation
     {
         public static List<int> Inputs = new List<int>();
         public static List<int> Outputs = new List<int>();
-
+        public static Dictionary<int, int> CalcualatedDivisors = new Dictionary<int, int>();
         public static void Main()
         {
             var reader = new StreamReader(Console.OpenStandardInput());
@@ -20,6 +20,7 @@ namespace Spoj1Divisor_Summation
 
             DivisorSumation(reader, writer);
         }
+
         public static void DivisorSumation(TextReader reader, TextWriter writer)
         {
             TakeInputs(reader);
@@ -30,30 +31,30 @@ namespace Spoj1Divisor_Summation
             writer.Flush();
             writer.Close();
         }
+
         private static void TakeInputs(TextReader reader)
         {
             var firstInputDataString = reader.ReadLine();
             var inputsCount = int.Parse(firstInputDataString);
 
-
             for (int i = 0; i < inputsCount; i++)
             {
-            {
-                var liczba = int.Parse(reader.ReadLine());
-                Inputs.Add(liczba);
+                {
+                    var liczba = int.Parse(reader.ReadLine());
+                    Inputs.Add(liczba);
+                }
             }
         }
 
         private static void CalculateDividersSums()
         {
-            var validInputs= Inputs.Where(ValidInput());
+            var validInputs = Inputs.Where(ValidInput());
             foreach (var number in validInputs)
             {
                 Outputs.Add(SumDividers(number));
             }
         }
-
-
+        
         private static Func<int, bool> ValidInput()
         {
             int minInput = 1;
@@ -61,23 +62,29 @@ namespace Spoj1Divisor_Summation
             return x => x >= minInput && x < maxInput;
         }
 
-        }
-
         public static int SumDividers(int number)
         {
-        {
             int dividersSum = 0;
-            for (int divider = 1; divider < number; divider++)
+            if (!CalcualatedDivisors.ContainsKey(number))
             {
-                bool isDividable = number % divider == 0;
-                if (isDividable)
+                for (int divider = 1; divider < number; divider++)
                 {
-                    dividersSum += divider;
-                }              
+                    bool isDividable = number % divider == 0;
+                    if (isDividable)
+                    {
+                        dividersSum += divider;
+                    }
+                }
+                CalcualatedDivisors.Add(number, dividersSum);
             }
-            return dividersSum;
+            else
+            {
+                dividersSum = CalcualatedDivisors[number];
+            }
 
+            return dividersSum;
         }
+
         private static void PrintOutputs(TextWriter writer)
         {
             foreach (var number in Outputs)
@@ -87,3 +94,4 @@ namespace Spoj1Divisor_Summation
         }
     }
 }
+

@@ -32,7 +32,6 @@ namespace Spoj1Divisor_Summation.Tests
         {
             var expectedResult = new StringBuilder();
             expectedResult.AppendLine("0");
-            expectedResult.AppendLine("0");
             expectedResult.AppendLine("1");
             expectedResult.AppendLine("1");
             expectedResult.AppendLine("3");
