@@ -9,7 +9,8 @@ namespace Spoj1Divisor_Summation
 {
     public class Program
     {
-        public const int maxRange = 500000, minRange = 1;
+        public const int MaxRange = 500000;
+        public const int MinRange = 1;
         public static void Main()
         {
             var reader = new StreamReader(Console.OpenStandardInput());
@@ -24,50 +25,50 @@ namespace Spoj1Divisor_Summation
         public static void DivisorSumation(TextReader reader, TextWriter writer)
         {
 
-            ValidateInput(reader, writer);
+            GetAllDivisorsSumation(reader, writer);
             reader.Close();
             writer.Flush();
             writer.Close();
         }
-        public static void ValidateInput(TextReader reader, TextWriter writer)
+
+        public static void GetAllDivisorsSumation(TextReader reader, TextWriter writer)
         {
-            int quantity;
-            bool validateQuantity = int.TryParse(reader.ReadLine(), out quantity);
+            var inputQuantity = GetNumber(reader.ReadLine());
 
-            while (!validateQuantity)
+            for (var size = 0; size < inputQuantity; size++)
             {
-                validateQuantity = int.TryParse(reader.ReadLine(), out quantity);
-            }
-
-            for (var size = 0; size < quantity; size++)
-            {
-                ValidateInputNumbers(reader, writer);
+                int inputedNumber = GetNumber(reader.ReadLine());
+                writer.WriteLine(GetSumOfProperDivisors(inputedNumber));
             }
         }
-        public static void ValidateInputNumbers(TextReader reader, TextWriter writer)
-        {
-            int number;
-            bool validateNumber = int.TryParse(reader.ReadLine(), out number) && number < maxRange && number >= minRange;
 
-            while (!validateNumber)
-            {
-                validateNumber = int.TryParse(reader.ReadLine(), out number) && number < maxRange && number >= minRange;
-            }
-            writer.WriteLine(GetSumOfProperDivisors(number));
+        public static int GetNumber(string inputedNumber)
+        {
+            var inputNumber = int.Parse(inputedNumber);
+            ValidateInputedNumbers(inputNumber);
+            return inputNumber;
+        }
+
+        public static void ValidateInputedNumbers(int inputedNumber)
+        {
+            bool isValidRange = inputedNumber < MaxRange && inputedNumber >= MinRange;
+            while (!isValidRange) throw new Exception($"Invalid input: Please enter a number between {MinRange} and {MaxRange}");
         }
 
         public static int GetSumOfProperDivisors(int number)
         {
-            var total = 0;
+            var sum = 0;
 
             for (var divisor = 1; divisor < number; divisor++)
             {
-                if (number % divisor == 0)
+                var isProperDivisor = number % divisor == 0;
+
+                if (isProperDivisor)
                 {
-                    total += divisor;
+                    sum += divisor;
                 }
             }
-            return total;
+            return sum;
 
         }
     }
