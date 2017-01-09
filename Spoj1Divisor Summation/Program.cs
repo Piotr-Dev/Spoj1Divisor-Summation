@@ -11,6 +11,7 @@ namespace Spoj1Divisor_Summation
     {
         public static List<int> Inputs = new List<int>();
         public static List<int> Outputs = new List<int>();
+
         public static void Main()
         {
             var reader = new StreamReader(Console.OpenStandardInput());
@@ -32,10 +33,10 @@ namespace Spoj1Divisor_Summation
         }
         private static void TakeInputs(TextReader reader)
         {
-            var inputDataString = reader.ReadLine();
-            var inputsNumber = int.Parse(inputDataString);
+            var firstInputDataString = reader.ReadLine();
+            var inputsCount = int.Parse(firstInputDataString);
 
-            for (int i = 0; i < inputsNumber; i++)
+            for (int i = 0; i < inputsCount; i++)
             {
                 var liczba = int.Parse(reader.ReadLine());
                 Inputs.Add(liczba);
@@ -44,21 +45,34 @@ namespace Spoj1Divisor_Summation
 
         private static void CalculateDividersSums()
         {
-            foreach (var number in Inputs)
+            var validInputs= Inputs.Where(ValidInput());
+            foreach (var number in validInputs)
             {
-                int dividersSum = 0;
-                if (number >= 1 && number <= 500000)
-                {
-                    for (int divider = 1; divider < number; divider++)
-                    {
-                        bool isDividable = number % divider == 0;
-                        dividersSum += isDividable ? divider : 0;
-                    }
-                    Outputs.Add(dividersSum);
-                }
+                Outputs.Add(SumDividers(number));
             }
         }
 
+        private static Func<int, bool> ValidInput()
+        {
+            int minInput = 1;
+            int maxInput = 500000;
+            return x => x >= minInput && x < maxInput;
+        }
+
+        public static int SumDividers(int number)
+        {
+            int dividersSum = 0;
+            for (int divider = 1; divider < number; divider++)
+            {
+                bool isDividable = number % divider == 0;
+                if (isDividable)
+                {
+                    dividersSum += divider;
+                }              
+            }
+            return dividersSum;
+
+        }
         private static void PrintOutputs(TextWriter writer)
         {
             foreach (var number in Outputs)
