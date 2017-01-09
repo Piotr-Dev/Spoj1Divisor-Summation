@@ -5,10 +5,10 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Spoj1Divisor_SummationTests
 {
-    [TestClass()]
+    [TestClass]
     public class ParseTests
     {
-        [TestMethod()]
+        [TestMethod]
         public void TryParseIntCorrectnessTest()
         {
             var numberInString = "33333333333333333333333333333";
@@ -18,5 +18,7 @@ namespace Spoj1Divisor_SummationTests
             Assert.AreNotSame(isNumber,true);
             Assert.AreEqual(number,0);
         }
+
+        
     }
 }
