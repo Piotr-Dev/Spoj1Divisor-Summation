@@ -55,6 +55,7 @@ namespace Spoj1Divisor_Summation
             for (int i = 0; i < numberCount; i++)
             {
                 var number = Convert.ToInt32(reader.ReadLine());
+                ValidateInputNumber(number);
                 divisorsSums.Add(CalculateDivisors(number).Sum());
             }
             return divisorsSums;
@@ -79,13 +80,7 @@ namespace Spoj1Divisor_Summation
             {
                 writer.WriteLine(divisorsSum);
             }
-            const int numericInputUpperRange = 50000;
-
-            var isOutOfRange = input < numericInputLowerRange ||
-                               input > numericInputUpperRange;
-
-            if (isOutOfRange)
-                throw new ArgumentOutOfRangeException($"Expected range is ({numericInputLowerRange} , {numericInputUpperRange}) ");
+            
         }
     }
 }
