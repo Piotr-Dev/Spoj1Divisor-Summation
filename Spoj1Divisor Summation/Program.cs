@@ -11,7 +11,7 @@ namespace Spoj1Divisor_Summation
     {
         public static List<int> Inputs = new List<int>();
         public static List<int> Outputs = new List<int>();
-        public static Dictionary<int, int> CalcualatedDivisors = new Dictionary<int, int>();
+        public static Dictionary<int, int> CalcualatedDividers = new Dictionary<int, int>();
         public static void Main()
         {
             var reader = new StreamReader(Console.OpenStandardInput());
@@ -65,7 +65,7 @@ namespace Spoj1Divisor_Summation
         public static int SumDividers(int number)
         {
             int dividersSum = 0;
-            if (!CalcualatedDivisors.ContainsKey(number))
+            if (!CalcualatedDividers.ContainsKey(number))
             {
                 for (int divider = 1; divider < number; divider++)
                 {
@@ -75,13 +75,12 @@ namespace Spoj1Divisor_Summation
                         dividersSum += divider;
                     }
                 }
-                CalcualatedDivisors.Add(number, dividersSum);
+                CalcualatedDividers.Add(number, dividersSum);
             }
             else
             {
-                dividersSum = CalcualatedDivisors[number];
+                dividersSum = CalcualatedDividers[number];
             }
-
             return dividersSum;
         }
 
