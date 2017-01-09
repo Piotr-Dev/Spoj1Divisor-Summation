@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Security.Principal;
 
 
 namespace Spoj1Divisor_Summation
@@ -9,8 +11,10 @@ namespace Spoj1Divisor_Summation
         private const int MinRange = 1;
         private const int MaxRange = 500000;
 
+
         public static void Main()
         {
+
             var reader = new StreamReader(Console.OpenStandardInput());
             var writer = new StreamWriter(Console.OpenStandardOutput());
             writer.AutoFlush = false;
@@ -24,11 +28,13 @@ namespace Spoj1Divisor_Summation
 
             var inputCount = GetNumberFromInputString(inputString);
 
+            Dictionary<int, int> sumDictionary = new Dictionary<int, int>();
+
             for (int i = 0; i < inputCount; i++)
             {
                 inputString = reader.ReadLine();
                 var number = GetNumberFromInputString(inputString);
-                writer.WriteLine(CalculateSumOfDivisorsForNumber(number));
+                writer.WriteLine(CalculateSumOfDivisorsForNumber(number, sumDictionary));
             }
 
             reader.Close();
@@ -39,7 +45,7 @@ namespace Spoj1Divisor_Summation
         private static int GetNumberFromInputString(string inputString)
         {
             var number = int.Parse(inputString);
-            ValidateDataFromInput(number);      
+            ValidateDataFromInput(number);
             return number;
         }
 
@@ -49,19 +55,27 @@ namespace Spoj1Divisor_Summation
             if (isNotInRange) throw new ArgumentOutOfRangeException("number", $"Input {number} not in range: {MinRange}-{MaxRange}");
         }
 
-        private static int CalculateSumOfDivisorsForNumber(int number)
+        private static int CalculateSumOfDivisorsForNumber(int number, Dictionary<int, int> sumDictionary)
         {
             var sum = 0;
-            
+
+            if (sumDictionary.ContainsKey(number))
+            {
+                return sumDictionary[number];
+            }
+
+
             for (var divider = 1; divider < number; divider++)
             {
                 var isDivisable = number % divider == 0;
-                
+
                 if (isDivisable)
                 {
                     sum += divider;
                 }
             }
+
+            sumDictionary.Add(number, sum);
 
             return sum;
         }
