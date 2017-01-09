@@ -17,11 +17,7 @@ namespace Spoj1Divisor_Summation
                 var writer = new StreamWriter(Console.OpenStandardOutput());
                 writer.AutoFlush = false;
                 
-                DivisorSumation(reader, writer);
-
-                reader.Close();
-                writer.Flush();
-                writer.Close();
+                DivisorSumation(reader, writer); 
             }
             catch (Exception e)
             {
@@ -34,7 +30,14 @@ namespace Spoj1Divisor_Summation
         {
             var inputCount = Convert.ToInt32(reader.ReadLine());
             ValidateInputNumber(inputCount);
-            DivisorSumationCalculation(inputCount,reader,writer);
+
+            var sumOfDivisors = DivisorSumationCalculation(inputCount,reader);
+
+            PrintResults(sumOfDivisors,writer);
+
+            reader.Close();
+            writer.Flush();
+            writer.Close();
         }
 
         private static void ValidateInputNumber(int inputNumber)
@@ -42,20 +45,22 @@ namespace Spoj1Divisor_Summation
             const int lowerLimit = 1;
             const int upperLimit = 500000;
 
-            if (inputNumber < lowerLimit) throw new Exception("Incorrect input (must be greather than 1)");
-            if (inputNumber > upperLimit) throw new Exception("Incorrect input (must be smaller than 500000))");
+            if (inputNumber < lowerLimit) throw new Exception($"Incorrect input (must be greather than {lowerLimit})");
+            if (inputNumber > upperLimit) throw new Exception($"Incorrect input (must be smaller than {upperLimit})");
         }
 
-        private static void DivisorSumationCalculation(int numberCount,TextReader reader, TextWriter writer)
+        private static IEnumerable<int> DivisorSumationCalculation(int numberCount,TextReader reader)
         {
+            var divisorsSums = new List<int>();
             for (int i = 0; i < numberCount; i++)
             {
                 var number = Convert.ToInt32(reader.ReadLine());
-                writer.WriteLine(CalculateDivisors(number).Sum());
+                divisorsSums.Add(CalculateDivisors(number).Sum());
             }
+            return divisorsSums;
         }
 
-        private static List<int>CalculateDivisors(int number)
+        private static IEnumerable<int>CalculateDivisors(int number)
         {
             var divisors = new List<int>();
 
@@ -66,6 +71,14 @@ namespace Spoj1Divisor_Summation
             }
 
             return divisors;
+        }
+
+        private static void PrintResults(IEnumerable<int> divisorsSums, TextWriter writer)
+        {
+            foreach (var divisorsSum in divisorsSums)
+            {
+                writer.WriteLine(divisorsSum);
+            }
         }
     }
 }
